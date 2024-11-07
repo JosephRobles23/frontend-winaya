@@ -6,7 +6,7 @@ export default function LeftSidebar() {
     <div className="fixed left-0 top-16 w-64 h-[calc(100vh-4rem)] border-r border-gray-200 bg-white p-4">
       <div className="flex items-center gap-3 mb-6">
         <img
-          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=50&h=50&q=80"
+          src="https://i.ibb.co/s9wY3Wv/Ari.png"
           alt="Arianna Yauri"
           className="w-12 h-12 rounded-full"
         />

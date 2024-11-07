@@ -6,7 +6,7 @@ export default function CreatePost() {
     <div className="bg-white rounded-lg shadow p-4 mb-4">
       <div className="flex items-center gap-3 mb-4">
         <img
-          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=40&h=40&q=80"
+          src="https://i.ibb.co/s9wY3Wv/Ari.png"
           alt="Profile"
           className="w-10 h-10 rounded-full"
         />
