@@ -75,7 +75,7 @@ export default function Forum() {
               sortBy === 'new' ? 'bg-pink-100 text-pink-600' : 'text-gray-600 hover:bg-gray-100'
             }`}
           >
-            <Clock className="w-4 h-4" />
+            <Clock className="w-4 h-4 hidden" />
             Nuevo
           </button>
           <button
