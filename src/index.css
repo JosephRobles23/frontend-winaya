@@ -50,4 +50,18 @@ body {
 
 .fc .fc-event-title {
   @apply text-sm font-medium;
+}@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: rgb(253, 242, 255);
+}
+
+.auth-gradient {
+  background: linear-gradient(to right, #a855f7, #ec4899);
+}
+
+.auth-container {
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
 }
