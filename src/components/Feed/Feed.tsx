@@ -1,34 +1,38 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import CreatePost from './CreatePost';
 import Post from './Post';
+import { FeedItem } from './interfaces/Feed-interface.interface';
 
 export default function Feed() {
-  const posts = [
-    {
-      author: {
-        name: "Maria Casas Rojas",
-        title: "CEO & Founder - SHANON",
-        avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=50&h=50&q=80",
-        time: "20:29 am"
-      },
-      content: "Querida comunidad vengo a contarles que eh abierto mi nuevo emprendimiento de ropa.",
-      image: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      likes: 3,
-      comments: 7
-    },
-    {
-      author: {
-        name: "Kristina Alejandro Casas",
-        title: "CEO & Founder - SHANON",
-        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=50&h=50&q=80",
-        time: "19:45 am"
-      },
-      content: "Querida comunidad vengo a contarles que eh abierto mi nuevo emprendimiento de pastelerías.",
-      image: "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      likes: 3,
-      comments: 7
-    }
-  ];
+  const [posts, setPosts] = useState<FeedItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEyYjRmZjk3LTQzY2QtNGZiMC04YjFmLWQ2NTZmNDFlNjcyMSIsImlhdCI6MTczMTEyODcyOCwiZXhwIjoxNzMxMTU3NTI4fQ.bvUIXq0drxCXMX3ytqTVrLTCpnnKep2fHp_VJjld4vQ";  // Sustituye por tu Bearer Token
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/post', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        setPosts(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, [token]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="max-w-2xl mx-auto py-4 px-4">
