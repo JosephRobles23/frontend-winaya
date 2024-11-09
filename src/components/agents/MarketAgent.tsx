@@ -31,7 +31,7 @@ export function MarketAgent() {
       // const response = await axios.post('http://127.0.0.1:8000/mercado', {
       //   pregunta: inputText,
       // });
-      const response = await axios.post('https://5483-38-25-30-89.ngrok-free.app/mercado', {
+      const response = await axios.post('https://e1e2-132-251-2-146.ngrok-free.app/mercado', {
         pregunta: inputText,
       });
 
