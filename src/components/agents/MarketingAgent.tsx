@@ -1,5 +1,7 @@
+// src/components/agents/MarketingAgent.tsx
 import { useState } from 'react';
 import { Send } from 'lucide-react';
+import axios from 'axios';
 
 export function MarketingAgent() {
   const [messages, setMessages] = useState([
@@ -9,9 +11,52 @@ export function MarketingAgent() {
       isBot: true,
     },
   ]);
+  const [inputText, setInputText] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSendMessage = async () => {
+    if (inputText.trim() === '') return;
+
+    const userMessage = {
+      id: messages.length + 1,
+      text: inputText,
+      isBot: false,
+    };
+
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
+    setInputText('');
+    setIsLoading(true);
+
+    try {
+      // const response = await axios.post('http://127.0.0.1:8000/marketing', {
+      //   pregunta: inputText,
+      // });
+      const response = await axios.post('https://5483-38-25-30-89.ngrok-free.app/marketing', {
+        pregunta: inputText,
+      });
+
+      const botMessage = {
+        id: messages.length + 2,
+        text: response.data.respuesta,
+        isBot: true,
+      };
+
+      setMessages((prevMessages) => [...prevMessages, botMessage]);
+    } catch (error) {
+      console.error('Error al consultar el bot:', error);
+      const errorMessage = {
+        id: messages.length + 2,
+        text: 'Lo siento, hubo un error al procesar tu solicitud.',
+        isBot: true,
+      };
+      setMessages((prevMessages) => [...prevMessages, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
-    <div className="max-w-3xl mx-auto h-[calc(100vh-3.5rem)] flex flex-col">
+    <div className="max-w-3xl mx-auto h-screen flex flex-col">
       <div className="bg-white p-4 border-b">
         <h1 className="text-xl font-semibold text-pink-600">Agente de Marketing</h1>
         <p className="text-gray-600">Tu estratega en marketing digital y branding</p>
@@ -40,8 +85,20 @@ export function MarketingAgent() {
             type="text"
             placeholder="Escribe tu mensaje..."
             className="flex-1 px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-pink-500"
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                handleSendMessage();
+              }
+            }}
+            disabled={isLoading}
           />
-          <button className="p-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700">
+          <button
+            className="p-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 disabled:opacity-50"
+            onClick={handleSendMessage}
+            disabled={isLoading}
+          >
             <Send className="w-5 h-5" />
           </button>
         </div>

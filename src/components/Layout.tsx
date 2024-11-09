@@ -41,7 +41,7 @@ export function Layout({ children }: LayoutProps) {
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      navigate('/login');
+      navigate('/auth/login');
     } catch (error) {
       console.error('Error signing out:', error);
     }
