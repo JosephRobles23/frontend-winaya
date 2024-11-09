@@ -72,7 +72,7 @@ export const Login = () => {
 
       <p className="text-center text-gray-600 mb-4">
         ¿No tienes una cuenta?{' '}
-        <Link to="/register" className="text-purple-600 font-medium">
+        <Link to="/auth/register" className="text-purple-600 font-medium">
           Regístrate
         </Link>
       </p>

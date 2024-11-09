@@ -1,19 +1,49 @@
-import { Award, Users, Heart, MessageCircle, Share2 } from 'lucide-react';
+import { Award, Users, Heart, MessageCircle, Share2, MapPin } from 'lucide-react';
+import { useNavigate} from 'react-router-dom';
+
+const events = [
+  {
+    id: 1,
+    title: 'Workshop de Emprendimiento',
+    description: 'Aprende las bases para iniciar tu propio negocio con expertos del sector.',
+    location: 'Centro Empresarial Lima',
+    date: '14 de marzo de 2024',
+  },
+  {
+    id: 2,
+    title: 'Conferencia Tech Women',
+    description: 'Únete a las mujeres líderes en tecnología para una jornada de networking.',
+    location: 'Hotel Westin Lima',
+    date: '19 de marzo de 2024',
+  },
+  {
+    id: 3,
+    title: 'Feria de Emprendedoras',
+    description: 'Exhibe tus productos y conecta con otras emprendedoras.',
+    location: 'Parque Kennedy, Miraflores',
+    date: '24 de marzo de 2024',
+  },
+];
+
 
 export function Profile() {
+  const navigate = useNavigate();
+  const handleViewProductDetail = () => {
+    navigate('/product/1');
+  };
   const posts = [
     {
       id: 1,
-      content: 'Nuevo diseño para la campaña de primavera 🌸',
-      image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400',
+      content: 'Nuevo producto de menta para la tienda 🌸',
+      image: 'https://i.pinimg.com/564x/cc/87/13/cc8713d42cb54a9720c3dcd2d5c4c14a.jpg',
       likes: 124,
       comments: 15,
       time: '2h'
     },
     {
       id: 2,
-      content: 'Mi último proyecto de ilustración infantil ✨',
-      image: 'https://images.unsplash.com/photo-1594735812599-e2ad264b0d31?w=400',
+      content: 'Tenemos una nueva vitrina en la tienda✨',
+      image: 'https://i.pinimg.com/1200x/cb/9b/27/cb9b2787fdb520c69900a1df1f074cc4.jpg',
       likes: 89,
       comments: 8,
       time: '5h'
@@ -23,38 +53,38 @@ export function Profile() {
   const experiences = [
     {
       id: 1,
-      content: 'Participación en el Hackathon Internacional de NASA Space Apps Challenge.',
+      content: 'Curso de preparación de helados artesaneles',
       date: 'Octubre 2024',
-      image: 'https://images.unsplash.com/photo-1502767089025-6572583495b8?w=400'
+      image: 'https://i.pinimg.com/564x/f6/ce/e1/f6cee111c4f21a443870e47647c91804.jpg'
     },
     {
       id: 2,
-      content: 'Presentación en el evento Juntas Somos Más.',
+      content: 'Presentación en la ExpoAlimentaria',
       date: 'Septiembre 2024',
-      image: 'https://images.unsplash.com/photo-1566722326043-4a3af02e915e?w=400'
+      image: 'https://i.ytimg.com/vi/ID4oR-lIEyw/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBn_P8cJu2PIOAfRhRKD-pxN5cGKQ'
     }
   ];
 
-  const upcomingMeetings = [
-    'CONAME',
-    'Juntas Somos Más',
-    'Encuentro Mujeres Líderes LATAM'
-  ];
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
       <div className="bg-white rounded-2xl shadow-sm p-6 mb-8">
         <div className="flex flex-col items-center text-center">
           <img
-            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400"
+            src="https://i.pinimg.com/736x/ce/6a/81/ce6a8105ee6297710c0306312e0c07a1.jpg"
             alt="Profile"
             className="w-24 h-24 rounded-full object-cover mb-4"
           />
           <div>
             <h1 className="text-2xl font-semibold">Alexandara Simonic</h1>
-            <p className="text-gray-600 mb-2">3D artista, Diseño gráfico</p>
+            <p className="text-gray-600 mb-2">Respostería</p>
             <p className="text-gray-600">Lima, Perú</p>
-            <button className="mt-4 text-purple-600 font-medium">Ver en tienda</button>
+            <button
+              onClick={handleViewProductDetail} // Ejecuta la función al hacer clic
+              className="mt-4 bg-purple-600 text-white font-medium rounded-md px-4 py-2 border border-purple-600 hover:bg-purple-700 transition duration-200"
+            >
+              Ver en tienda
+            </button>
           </div>
         </div>
 
@@ -94,6 +124,8 @@ export function Profile() {
         </div>
       </section>
 
+      
+
       <section className="mb-8">
         <h2 className="text-xl font-semibold mb-4">Experiencias y Logros</h2>
         <div className="space-y-4">
@@ -110,15 +142,32 @@ export function Profile() {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">Próximas Reuniones</h2>
-        <div className="space-y-4">
-          {upcomingMeetings.map((meeting, index) => (
-            <div key={index} className="bg-pink-100 rounded-lg shadow-sm p-6 text-center">
-              <p className="text-xl font-semibold text-gray-800">{meeting}</p>
+        <h2 className="text-xl font-semibold mb-4">Eventos</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {events.map(event => (
+            <div key={event.id} className="bg-white rounded-lg shadow-sm p-6 flex flex-col justify-between">
+              <div>
+                <h3 className="font-semibold text-lg">{event.title}</h3>
+                <p className="text-gray-600 text-sm mt-1">{event.description}</p>
+                <div className="flex items-center text-gray-500 text-sm mt-2">
+                  <MapPin className="w-4 h-4 mr-1" />
+                  {event.location}
+                </div>
+                <p className="text-gray-500 text-sm mt-1">{event.date}</p>
+              </div>
+              <div className="flex mt-4 gap-2">
+                <button className="flex-1 bg-pink-500 text-white font-medium py-2 rounded-md">
+                  Asistiré
+                </button>
+                <button className="flex-1 border border-gray-300 text-gray-700 font-medium py-2 rounded-md">
+                  Ver evento
+                </button>
+              </div>
             </div>
           ))}
         </div>
       </section>
+
 
       <section className="mb-8">
         <h2 className="text-xl font-semibold mb-4">Publicaciones</h2>

@@ -80,7 +80,7 @@ export const Register = () => {
 
       <p className="text-center text-gray-600 mb-4">
         ¿Ya tienes una cuenta?{' '}
-        <Link to="/login" className="text-purple-600 font-medium">
+        <Link to="/auth/login" className="text-purple-600 font-medium">
           Inicia sesión
         </Link>
       </p>
