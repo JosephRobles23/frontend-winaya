@@ -8,12 +8,12 @@ export default function Feed() {
   const [posts, setPosts] = useState<FeedItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEyYjRmZjk3LTQzY2QtNGZiMC04YjFmLWQ2NTZmNDFlNjcyMSIsImlhdCI6MTczMTEyODcyOCwiZXhwIjoxNzMxMTU3NTI4fQ.bvUIXq0drxCXMX3ytqTVrLTCpnnKep2fHp_VJjld4vQ";  // Sustituye por tu Bearer Token
+  const token = "";
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/post', {
+        const response = await axios.get('https://niqqau3ndt.us-east-2.awsapprunner.com/api/post', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
