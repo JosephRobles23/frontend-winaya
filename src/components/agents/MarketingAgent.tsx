@@ -1,5 +1,4 @@
-// src/components/agents/MarketingAgent.tsx
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Send } from 'lucide-react';
 import axios from 'axios';
 
@@ -13,31 +12,26 @@ export function MarketingAgent() {
   ]);
   const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [dots, setDots] = useState('');
+
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleSendMessage = async () => {
     if (inputText.trim() === '') return;
 
-    const userMessage = {
-      id: messages.length + 1,
-      text: inputText,
-      isBot: false,
-    };
-
+    const userMessage = { id: Date.now(), text: inputText, isBot: false };
     setMessages((prevMessages) => [...prevMessages, userMessage]);
     setInputText('');
     setIsLoading(true);
 
     try {
-      // const response = await axios.post('http://127.0.0.1:8000/marketing', {
-      //   pregunta: inputText,
-      // });
       const response = await axios.post('https://e1e2-132-251-2-146.ngrok-free.app/marketing', {
         pregunta: inputText,
       });
 
       const botMessage = {
-        id: messages.length + 2,
-        text: response.data.respuesta,
+        id: Date.now() + 1,
+        text: response.data.respuesta || 'Estoy aquí para ayudarte con tus consultas de marketing.',
         isBot: true,
       };
 
@@ -45,7 +39,7 @@ export function MarketingAgent() {
     } catch (error) {
       console.error('Error al consultar el bot:', error);
       const errorMessage = {
-        id: messages.length + 2,
+        id: Date.now() + 1,
         text: 'Lo siento, hubo un error al procesar tu solicitud.',
         isBot: true,
       };
@@ -54,6 +48,20 @@ export function MarketingAgent() {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (isLoading) {
+      intervalRef.current = setInterval(() => {
+        setDots((prev) => (prev.length === 3 ? '' : prev + '.'));
+      }, 500);
+    } else {
+      setDots('');
+    }
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [isLoading]);
 
   return (
     <div className="max-w-3xl mx-auto h-screen flex flex-col">
@@ -77,6 +85,13 @@ export function MarketingAgent() {
             </div>
           </div>
         ))}
+        {isLoading && (
+          <div className="flex justify-start">
+            <div className="max-w-[80%] rounded-lg px-4 py-2 bg-pink-50 text-pink-900">
+              <p>Consultado{dots}</p>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="p-4 border-t bg-white">
@@ -87,10 +102,8 @@ export function MarketingAgent() {
             className="flex-1 px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-pink-500"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') {
-                handleSendMessage();
-              }
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleSendMessage();
             }}
             disabled={isLoading}
           />

@@ -1,5 +1,4 @@
-// src/components/agents/MarketAgent.tsx
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Send } from 'lucide-react';
 import axios from 'axios';
 
@@ -12,32 +11,27 @@ export function MarketAgent() {
     },
   ]);
   const [inputText, setInputText] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [dots, setDots] = useState('');
+
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleSendMessage = async () => {
     if (inputText.trim() === '') return;
 
-    const userMessage = {
-      id: messages.length + 1,
-      text: inputText,
-      isBot: false,
-    };
-
-    setMessages((prevMessages) => [...prevMessages, userMessage]);
+    const userMessage = { id: Date.now(), text: inputText, isBot: false };
+    setMessages([...messages, userMessage]);
     setInputText('');
-    setIsLoading(true);
+    setLoading(true);
 
     try {
-      // const response = await axios.post('http://127.0.0.1:8000/mercado', {
-      //   pregunta: inputText,
-      // });
       const response = await axios.post('https://e1e2-132-251-2-146.ngrok-free.app/mercado', {
         pregunta: inputText,
       });
 
       const botMessage = {
-        id: messages.length + 2,
-        text: response.data.respuesta,
+        id: Date.now() + 1,
+        text: response.data.respuesta || 'Hubo un problema al obtener la respuesta.',
         isBot: true,
       };
 
@@ -45,15 +39,29 @@ export function MarketAgent() {
     } catch (error) {
       console.error('Error al consultar el bot:', error);
       const errorMessage = {
-        id: messages.length + 2,
+        id: Date.now() + 1,
         text: 'Lo siento, hubo un error al procesar tu solicitud.',
         isBot: true,
       };
       setMessages((prevMessages) => [...prevMessages, errorMessage]);
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (loading) {
+      intervalRef.current = setInterval(() => {
+        setDots((prev) => (prev.length === 3 ? '' : prev + '.'));
+      }, 500);
+    } else {
+      setDots('');
+    }
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [loading]);
 
   return (
     <div className="max-w-3xl mx-auto h-screen flex flex-col">
@@ -77,6 +85,13 @@ export function MarketAgent() {
             </div>
           </div>
         ))}
+        {loading && (
+          <div className="flex justify-start">
+            <div className="max-w-[80%] rounded-lg px-4 py-2 bg-blue-50 text-blue-900">
+              <p>Consultando{dots}</p>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="p-4 border-t bg-white">
@@ -92,12 +107,12 @@ export function MarketAgent() {
                 handleSendMessage();
               }
             }}
-            disabled={isLoading}
+            disabled={loading}
           />
           <button
             className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
             onClick={handleSendMessage}
-            disabled={isLoading}
+            disabled={loading}
           >
             <Send className="w-5 h-5" />
           </button>
