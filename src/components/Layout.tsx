@@ -72,9 +72,6 @@ export function Layout({ children }: LayoutProps) {
             <Link to="/chat">
               <MessageCircle className="w-6 h-6 text-gray-600" />
             </Link>
-            <Link to="/forum">
-              <MessageSquare className="w-6 h-6 text-gray-600 cursor-pointer hover:text-pink-500" />
-            </Link>
             <div className="relative" ref={notificationsRef}>
               <button
                 className="relative"
@@ -138,6 +135,16 @@ export function Layout({ children }: LayoutProps) {
                   >
                     <Calendar className="w-6 h-6 text-gray-600 cursor-pointer hover:text-pink-500" />
                     <span>Calendario</span>
+                  </button>
+                  <button
+                    onClick={() => {
+                      navigate('/forum');
+                      setIsProfileDropdownOpen(false);
+                    }}
+                    className="w-full px-4 py-2 text-left flex items-center gap-3 hover:bg-gray-50"
+                  >
+                    <MessageSquare className="w-6 h-6 text-gray-600 cursor-pointer hover:text-pink-500" />
+                    <span>Foro</span>
                   </button>
                   <button
                     onClick={() => {
