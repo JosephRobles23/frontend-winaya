@@ -146,56 +146,68 @@ export function Chat() {
                 <ArrowLeft className="w-5 h-5 text-gray-600" />
               </button>
             )}
-            <img
-              src={receiverUser?.profilePicture || ''}
-              alt={receiverUser?.fullName || 'Chat'}
-              className="w-12 h-12 rounded-full object-cover"
-            />
-            <div>
-              <h3 className="font-medium">{receiverUser?.fullName || 'Chat'}</h3>
-              <p className="text-sm text-gray-600">@{receiverUser?.fullName?.split(" ")[0]}</p>
-            </div>
+            {receiverUser ? (
+              <>
+                <img
+                  src={receiverUser.profilePicture}
+                  alt={receiverUser.fullName}
+                  className="w-12 h-12 rounded-full object-cover"
+                />
+                <div>
+                  <h3 className="font-medium">{receiverUser.fullName}</h3>
+                  <p className="text-sm text-gray-600">@{receiverUser.fullName.split(" ")[0]}</p>
+                </div>
+              </>
+            ) : (
+              <p className="text-center text-gray-500">Selecciona usuario</p>
+            )}
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          {messages.map((message) => (
-            <div
-              key={message.id}
-              className={`flex ${message.isUserMessage ? 'justify-end' : 'justify-start'}`}
-            >
+        {/* Mostrar mensajes solo si hay un usuario seleccionado */}
+        {receiverUser && (
+          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            {messages.map((message) => (
               <div
-                className={`max-w-[70%] rounded-lg px-4 py-2 ${
-                  message.isUserMessage ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-900'
-                }`}
+                key={message.id}
+                className={`flex ${message.isUserMessage ? 'justify-end' : 'justify-start'}`}
               >
-                <p>{message.text}</p>
-                <span className="text-xs opacity-75 mt-1 block">{message.time}</span>
+                <div
+                  className={`max-w-[70%] rounded-lg px-4 py-2 ${
+                    message.isUserMessage ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-900'
+                  }`}
+                >
+                  <p>{message.text}</p>
+                  <span className="text-xs opacity-75 mt-1 block">{message.time}</span>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="p-4 border-t">
-          <div className="flex items-center gap-2">
-            <button className="p-2 hover:bg-gray-100 rounded-full">
-              <Paperclip className="w-5 h-5 text-gray-500" />
-            </button>
-            <input
-              type="text"
-              placeholder="Mensaje..."
-              value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
-              className="flex-1 px-4 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-purple-500"
-            />
-            <button
-              onClick={handleSendMessage}
-              className="p-2 bg-purple-600 text-white rounded-full hover:bg-purple-700"
-            >
-              <Send className="w-5 h-5" />
-            </button>
+            ))}
           </div>
-        </div>
+        )}
+
+        {/* Input de mensaje solo si hay un usuario seleccionado */}
+        {receiverUser && (
+          <div className="p-4 border-t">
+            <div className="flex items-center gap-2">
+              <button className="p-2 hover:bg-gray-100 rounded-full">
+                <Paperclip className="w-5 h-5 text-gray-500" />
+              </button>
+              <input
+                type="text"
+                placeholder="Mensaje..."
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+                className="flex-1 px-4 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-purple-500"
+              />
+              <button
+                onClick={handleSendMessage}
+                className="p-2 bg-purple-600 text-white rounded-full hover:bg-purple-700"
+              >
+                <Send className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
