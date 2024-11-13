@@ -1,18 +1,30 @@
 import React from 'react';
 import { Users, Bookmark } from 'lucide-react';
+import useStore from '../store/login.store';
+import { useShallow } from 'zustand/react/shallow';
 
 export default function LeftSidebar() {
+  const { profilePicture, bio, email, fullName } = useStore(useShallow((state) => ({
+    fullName: state.fullName,
+    profilePicture: state.profilePicture,
+    email: state.email,
+    bio: state.bio,
+  })));
+
   return (
     <div className="fixed left-0 top-16 w-64 h-[calc(100vh-4rem)] border-r border-gray-200 bg-white p-4">
       <div className="flex items-center gap-3 mb-6">
         <img
-          src="https://i.ibb.co/s9wY3Wv/Ari.png"
-          alt="Arianna Yauri"
+          src={ profilePicture || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBD_ykDcG8TKeoMNSGsF88UYXjqjx3ZCeX-g&s'}
+          alt={fullName}
           className="w-12 h-12 rounded-full"
         />
         <div>
-          <h2 className="font-semibold">Arianna Yauri</h2>
-          <p className="text-sm text-gray-500">@arianna_yauri</p>
+          <h2 className="font-semibold">{ fullName }</h2>
+          <p className="text-sm text-gray-500">
+          @{fullName.replace(/\s+/g, "_")}
+
+          </p>
         </div>
       </div>
 

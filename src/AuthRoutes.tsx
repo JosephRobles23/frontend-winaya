@@ -7,9 +7,9 @@ import Welcome from './pages/Welcome';
 
 const AuthRoutes: React.FC = () => (
     <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/welcome" element={<Welcome />} />
+      <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
+      <Route path="welcome" element={<Welcome />} />
     </Routes>
 );
 

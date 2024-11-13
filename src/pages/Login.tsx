@@ -4,6 +4,8 @@ import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 
 import { auth } from '../lib/firebase';
 import { AuthLayout } from '../components/AuthLayout';
 import { AuthInput } from '../components/AuthInput';
+import axios from 'axios';
+import  useStore  from '../components/store/login.store';
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -30,7 +32,23 @@ export const Login = () => {
   const handleGoogleLogin = async () => {
     try {
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      const result: any = await signInWithPopup(auth, provider);
+      const urlBack = import.meta.env.VITE_BASE_URL;
+      const { data } = await axios.post(`${urlBack}api/auth/social-login`, {
+        fullName: result.user.displayName,
+        email: result.user.email,
+      });
+
+      localStorage.setItem('token', data.token);
+      const updateProfile = useStore.getState().updateProfile;
+      updateProfile({
+        fullName: data.user.fullName || '',
+        profilePicture: data.user.profilePicture ||  '',
+        email: data.user.email || '',
+        bio: data.user.bio || '',
+        id: data.user.id || '',
+      });
+
       navigate('/'); // Updated to redirect to WINAYA
     } catch (error) {
       setError('Error al iniciar sesión con Google. Por favor, intenta de nuevo.');

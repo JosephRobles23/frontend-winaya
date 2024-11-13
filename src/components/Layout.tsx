@@ -4,6 +4,8 @@ import { Search, Store, Calendar, MessageCircle, Bell, MessageSquare, Bot, User,
 import NotificationsDropdown from './Notifications/NotificationsDropdown';
 import { auth } from '../lib/firebase';
 import { signOut } from 'firebase/auth';
+import useStore from './store/login.store';
+import { useShallow } from 'zustand/react/shallow'
 
 interface LayoutProps {
   children: ReactNode;
@@ -24,6 +26,13 @@ export function Layout({ children }: LayoutProps) {
     { title: 'Agente de Marketing', path: '/agent/marketing' },
   ];
 
+  const { profilePicture } = useStore(useShallow((state) => ({
+    fullName: state.fullName,
+    profilePicture: state.profilePicture,
+    email: state.email,
+    bio: state.bio,
+  })));
+  
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (notificationsRef.current && !notificationsRef.current.contains(event.target as Node)) {
@@ -56,7 +65,7 @@ export function Layout({ children }: LayoutProps) {
             <div className="relative">
               <input
                 type="text"
-                placeholder="Buscar en WIMNAYA"
+                placeholder="Buscar en WINAYA"
                 className="w-[300px] pl-4 pr-10 py-2 rounded-full bg-pink-50 focus:outline-none focus:ring-2 focus:ring-pink-500 hidden sm:block"
               />
               <div className="w-10 h-10 rounded-full bg-pink-50 flex items-center justify-center sm:hidden">
@@ -109,7 +118,7 @@ export function Layout({ children }: LayoutProps) {
             <div className="relative" ref={profileDropdownRef}>
               <button onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}>
                 <img
-                  src="https://i.ibb.co/s9wY3Wv/Ari.png"
+                  src={profilePicture || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBD_ykDcG8TKeoMNSGsF88UYXjqjx3ZCeX-g&s'}
                   alt="Profile"
                   className="w-10 h-10 rounded-full cursor-pointer border-2 border-pink-500"
                 />

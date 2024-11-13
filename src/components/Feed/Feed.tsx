@@ -11,14 +11,15 @@ export default function Feed() {
   const token = "";
 
   useEffect(() => {
+    const urlBase = import.meta.env.VITE_BASE_URL;
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('https://niqqau3ndt.us-east-2.awsapprunner.com/api/post', {
+        const response = await axios.get(`${urlBase}api/post`, {
           headers: {
-            'Authorization': `Bearer ${token}`
-          }
+            'Authorization': `Bearer ${token}`,
+          },
         });
-
+        console.log(response, 'res');
         setPosts(response.data);
         setLoading(false);
       } catch (error) {
@@ -30,13 +31,18 @@ export default function Feed() {
     fetchPosts();
   }, [token]);
 
+  // Función para agregar un nuevo post al feed
+  const addNewPost = (newPost: FeedItem) => {
+    setPosts((prevPosts) => [newPost, ...prevPosts]); // Agregar el nuevo post al inicio
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className="max-w-2xl mx-auto py-4 px-4">
-      <CreatePost />
+      <CreatePost onPostCreated={addNewPost} /> {/* Pasar el callback al componente CreatePost */}
       {posts.map((post, index) => (
         <Post key={index} {...post} />
       ))}
