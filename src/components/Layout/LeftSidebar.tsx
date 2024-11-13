@@ -11,6 +11,9 @@ export default function LeftSidebar() {
     bio: state.bio,
   })));
 
+  const nameParts = fullName.split(" ");
+  const firstAndLastNames = `${nameParts[0]} ${nameParts[1]}`;
+  const username = firstAndLastNames.replace(/\s+/g, "_");
   return (
     <div className="fixed left-0 top-16 w-64 h-[calc(100vh-4rem)] border-r border-gray-200 bg-white p-4">
       <div className="flex items-center gap-3 mb-6">
@@ -20,11 +23,10 @@ export default function LeftSidebar() {
           className="w-12 h-12 rounded-full"
         />
         <div>
-          <h2 className="font-semibold">{ fullName }</h2>
-          <p className="text-sm text-gray-500">
-          @{fullName.replace(/\s+/g, "_")}
-
-          </p>
+        <h2 className="font-semibold">{ firstAndLastNames }</h2>
+        <p className="text-sm text-gray-500">
+          @{username.toLocaleLowerCase()}
+        </p>
         </div>
       </div>
 
