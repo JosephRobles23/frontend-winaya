@@ -8,20 +8,24 @@ export default function Welcome() {
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white/80 backdrop-blur-lg rounded-2xl p-8 shadow-xl">
         <div className="flex flex-col items-center space-y-6">
-          <div className="w-24 h-24 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
-            <span className="text-4xl text-white font-bold">W</span>
+          <div className="w-24 h-24 bg-white rounded-2xl flex items-center justify-center">
+            <img
+              src="https://i.ibb.co/bFfTpGZ/width-200-1.webp" 
+              alt="Logo"
+              className="w-full h-full object-cover rounded-xl"
+            />
           </div>
-          
+
           <h1 className="text-3xl font-bold text-center bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
             WIMNAYA
           </h1>
-          
+
           <div className="text-center space-y-2">
             <h2 className="text-xl font-semibold text-gray-800">
-              Conectemos en una sola plataforma
+              La comunidad que empodera a las emprendedoras.
             </h2>
             <p className="text-gray-600">
-              Únete a nuestra comunidad y comienza a conectar con otros
+              Muestra tus productos, aprende y crece con nosotras.
             </p>
           </div>
 

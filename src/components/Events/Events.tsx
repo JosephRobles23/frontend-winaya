@@ -23,7 +23,7 @@ export default function Events() {
       id: '1',
       title: 'Curso gratis online "Excel intermedio" de la Municipalidad de Majes',
       description: 'La Municipalidad de *MAJES* , en coordinación con el Instituto de Formación Empresarial Avanzys te invita a participa del curso virtual ...',
-      image: 'https://www.formate.pe/eventos/202411/imagen-curso-gratuito-virtual-excel-intermedio-municipalidad-majes.jpg',
+      image: 'https://i.pinimg.com/236x/55/12/84/551284a43a02b1ee63263ad182dab166.jpg',
       location: 'Virtual',
       date: '2024-11-23',
       link:'https://docs.google.com/forms/d/e/1FAIpQLSdr3uAGtmqSty5KOHiRto2jrVViYRx5PhkGrqtphIlmtWedcw/viewform'
@@ -32,7 +32,7 @@ export default function Events() {
       id: '2',
       title: 'Taller online gratis "Introducción a la Robótica para Educación Básica"',
       description: 'Klassna STEAM te invita a participar de manera GRATUITA del curso Introducción a la Robótica para  Educación Básica...',
-      image: 'https://www.formate.pe/eventos/202411/imagen-taller-virtual-gratuito-introduccion-robotica-educacion-basica.jpg',
+      image: 'https://i.pinimg.com/236x/83/64/4b/83644b017404267d844506e59167107a.jpg',
       location: 'Virtual',
       date: '2024-11-11',
       link:'https://docs.google.com/forms/d/e/1FAIpQLScgE4FUNYMLXMdGf7VZz2fk8H0ILiKuXraut_jAlNlai8rO3Q/viewform'
@@ -41,7 +41,7 @@ export default function Events() {
       id: '3',
       title: 'Curso gratis online "Asistente contable" de la Municipalidad de Majes',
       description: 'La Municipalidad de *MAJES* , en coordinación con el Instituto de Formación Empresarial Avanzys te invita a participa del curso virtual ...',
-      image: 'https://www.formate.pe/eventos/202411/imagen-curso-gratuito-virtual-asistente-contable-municipalidad-majes.jpg',
+      image: 'https://www.expoknews.com/wp-content/uploads/2018/04/5-razones-por-las-que-la-robo%CC%81tica-promueve-la-equidad-de-ge%CC%81nero-2.jpg',
       location: 'Virtual',
       date: '2024-11-5',
       link:'https://docs.google.com/forms/d/e/1FAIpQLSdr3uAGtmqSty5KOHiRto2jrVViYRx5PhkGrqtphIlmtWedcw/viewform'
