@@ -1,6 +1,6 @@
 import { ReactNode, useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, Store, Calendar, MessageCircle, Bell, MessageSquare, Bot, User, LogOut,ArrowLeft } from 'lucide-react';
+import { Search, Store, Calendar, MessageCircle, Bell, MessageSquare, Bot, User, LogOut } from 'lucide-react';
 import NotificationsDropdown from './Notifications/NotificationsDropdown';
 import { auth } from '../lib/firebase';
 import { signOut } from 'firebase/auth';
@@ -178,7 +178,7 @@ export function Layout({ children }: LayoutProps) {
           </div>
         </nav>
       </header>
-      <main className="pt-14 min-h-screen">{children}</main>
+      <main className="block min-h-screen">{children}</main>
     </div>
   );
 }

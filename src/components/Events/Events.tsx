@@ -3,7 +3,8 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import EventCard from './EventCard';
-import { MapPin } from 'lucide-react';
+/* import { MapPin } from 'lucide-react'; */
+import EventMap from '../Map';
 
 interface Event {
   id: string;
@@ -13,44 +14,88 @@ interface Event {
   location: string;
   date: string;
   attending?: boolean;
+  link:string;
 }
 
 export default function Events() {
   const [events, setEvents] = useState<Event[]>([
     {
       id: '1',
-      title: 'Workshop de Emprendimiento',
-      description: 'Aprende las bases para iniciar tu propio negocio con expertos del sector.',
-      image: 'https://images.unsplash.com/photo-1515169067868-5387ec356754?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      location: 'Centro Empresarial Lima',
-      date: '2024-03-15',
+      title: 'Curso gratis online "Excel intermedio" de la Municipalidad de Majes',
+      description: 'La Municipalidad de *MAJES* , en coordinación con el Instituto de Formación Empresarial Avanzys te invita a participa del curso virtual ...',
+      image: 'https://www.formate.pe/eventos/202411/imagen-curso-gratuito-virtual-excel-intermedio-municipalidad-majes.jpg',
+      location: 'Virtual',
+      date: '2024-11-23',
+      link:'https://docs.google.com/forms/d/e/1FAIpQLSdr3uAGtmqSty5KOHiRto2jrVViYRx5PhkGrqtphIlmtWedcw/viewform'
     },
     {
       id: '2',
-      title: 'Conferencia Tech Women',
-      description: 'Únete a las mujeres líderes en tecnología para una jornada de networking.',
-      image: 'https://images.unsplash.com/photo-1591115765373-5207764f72e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      location: 'Hotel Westin Lima',
-      date: '2024-03-20',
+      title: 'Taller online gratis "Introducción a la Robótica para Educación Básica"',
+      description: 'Klassna STEAM te invita a participar de manera GRATUITA del curso Introducción a la Robótica para  Educación Básica...',
+      image: 'https://www.formate.pe/eventos/202411/imagen-taller-virtual-gratuito-introduccion-robotica-educacion-basica.jpg',
+      location: 'Virtual',
+      date: '2024-11-11',
+      link:'https://docs.google.com/forms/d/e/1FAIpQLScgE4FUNYMLXMdGf7VZz2fk8H0ILiKuXraut_jAlNlai8rO3Q/viewform'
     },
     {
       id: '3',
-      title: 'Feria de Emprendedoras',
-      description: 'Exhibe tus productos y conecta con otras emprendedoras.',
-      image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      location: 'Parque Kennedy, Miraflores',
-      date: '2024-03-25',
+      title: 'Curso gratis online "Asistente contable" de la Municipalidad de Majes',
+      description: 'La Municipalidad de *MAJES* , en coordinación con el Instituto de Formación Empresarial Avanzys te invita a participa del curso virtual ...',
+      image: 'https://www.formate.pe/eventos/202411/imagen-curso-gratuito-virtual-asistente-contable-municipalidad-majes.jpg',
+      location: 'Virtual',
+      date: '2024-11-5',
+      link:'https://docs.google.com/forms/d/e/1FAIpQLSdr3uAGtmqSty5KOHiRto2jrVViYRx5PhkGrqtphIlmtWedcw/viewform'
+    },
+  ]);
+  // Estado de conferencias
+  const [conference, setConference] = useState<Event[]>([
+    {
+      id: '4',
+      title: 'Cumbre Mundial de Mujeres 2024',
+      description: 'Este es el lugar para ti, si eres una mujer emprendedora, empresaria o directiva con ganas de crear, inspirar y liderar. Aquí encontrarás no solo el impulso para transformar tu vida profesional, sino también una oportunidad única para contribuir a un cambio real en la sociedad..',
+      image: 'https://www.cumbremundialmujeres.org/wp-content/uploads/2024/10/cumbre-1.jpg',
+      location: 'Guayaquil, Mall del Sol',
+      date: '2024-11-28',
+      link:'https://www.cumbremundialmujeres.org/'
+    },
+    {
+      id: '5',
+      title: 'Women in Technology Summit Latinoamérica 2024',
+      description: 'El Women in Technology Summit 2024, ofrecerá una nutrida agenda de actividades diseñadas para reconocer, inspirar, educar, promover y fomentar la participación de mujeres en los sectores de tecnología e innovación.',
+      image: 'https://www.revistaeconomia.com/wp-content/uploads/2024/09/Economia_Web-1-3.jpg',
+      location: 'Marriott Hotel',
+      date: '2024-10-10',
+      link:'https://www.revistaeconomia.com/women-in-technology-summit-latinoamerica-2024-la-primera-cumbre-tecnologica-de-mujeres-en-el-peru-que-promueve-el-liderazgo-y-la-diversidad/'
+    },
+    {
+      id: '6',
+      title: 'Mujeres y empresas',
+      description: 'Este evento internacional está diseñado para promover la igualdad de oportunidades y la autonomía económica de las mujeres emprendedoras.',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTliXEgkp_Lp9SNh5JPUkhzFyHkiOoMhVAigA&s',
+      location: 'Puerto Varas',
+      date: '2024-09-04',
+      link:'https://www.instagram.com/incubatecufro/p/C-qj_2gSoKj/?img_index=1'
     },
   ]);
 
-  const handleAttendance = (eventId: string) => {
-    setEvents(events.map(event => 
-      event.id === eventId 
-        ? { ...event, attending: !event.attending }
-        : event
-    ));
+  // Función para manejar asistencia en eventos y conferencias
+  const handleAttendance = (id: string, listType: 'events' | 'conference') => {
+    if (listType === 'events') {
+      setEvents(events.map(event =>
+        event.id === id
+          ? { ...event, attending: !event.attending }
+          : event
+      ));
+    } else if (listType === 'conference') {
+      setConference(conference.map(conf =>
+        conf.id === id
+          ? { ...conf, attending: !conf.attending }
+          : conf
+      ));
+    }
   };
 
+  // Lista de eventos para el calendario
   const calendarEvents = events
     .filter(event => event.attending)
     .map(event => ({
@@ -58,13 +103,26 @@ export default function Events() {
       date: event.date,
     }));
 
+  // Lista de conferencias para el calendario
+  const calendarConferences = conference
+    .filter(conf => conf.attending)
+    .map(conf => ({
+      title: conf.title,
+      date: conf.date,
+    }));
+
   return (
-    <div className="max-w-7xl mx-auto py-6 px-4">
+    <div className="max-w-7xl mx-auto py-1 px-4">
+      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center justify-center mb-7 pt-5">
+        <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text blur-[0.2px]">
+          Calendar
+        </span>
+      </h1>
       <div className="mb-8 bg-white rounded-lg shadow-md p-4">
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
-          events={calendarEvents}
+          events={[...calendarEvents, ...calendarConferences]} // Combina ambas listas en un solo array
           headerToolbar={{
             left: 'prev,next today',
             center: 'title',
@@ -72,18 +130,50 @@ export default function Events() {
           }}
           height="auto"
         />
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center justify-center mb-7 pt-5">
+          <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text blur-[0.2px]">
+            Events
+          </span>
+        </h1>
+        <h1 className="text-2xl md:text-3xl lg:text-3xl font-bold flex items-center justify-left mb-7 pt-5">
+          <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text blur-[0.2px]">
+            Workshop
+          </span>
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+          {events.map(event => (
+            <EventCard
+              key={event.id}
+              event={event}
+              onAttend={() => handleAttendance(event.id, 'events')} // Especifica "events"
+            />
+          ))}
+        </div>
+        <h1 className="text-2xl md:text-3xl lg:text-3xl font-bold flex items-center justify-left mb-7 pt-5">
+          <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text blur-[0.2px]">
+            Conference
+          </span>
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+          {conference.map(event => (
+            <EventCard
+              key={event.id}
+              event={event}
+              onAttend={() => handleAttendance(event.id, 'conference')} // Especifica "conference"
+            />
+          ))}
+        </div>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center justify-center mb-7 pt-5">
+          <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text blur-[0.2px]">
+            Maps
+          </span>
+        </h1>
+        <div className="min-h-screen bg-gray-50 py-5">
+          <div className="flex-1 h-[calc(100vh-4rem)] py-30 border border-4 border-pink-500 rounded-ld">
+            <EventMap />
+          </div>
+        </div>
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {events.map(event => (
-          <EventCard
-            key={event.id}
-            event={event}
-            onAttend={() => handleAttendance(event.id)}
-          />
-        ))}
-      </div>
-      .div
     </div>
   );
 }
