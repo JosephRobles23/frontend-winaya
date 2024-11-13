@@ -25,7 +25,7 @@ export function MarketAgent() {
     setLoading(true);
 
     try {
-      const response = await axios.post('https://e1e2-132-251-2-146.ngrok-free.app/mercado', {
+      const response = await axios.post('https://811f-201-218-159-83.ngrok-free.app/mercado', {
         pregunta: inputText,
       });
 
