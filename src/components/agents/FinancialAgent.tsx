@@ -62,7 +62,7 @@ export function FinancialAgent() {
         <p className="text-gray-600">Tu asistente para decisiones financieras inteligentes</p>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 h-3/4">
         {messages.map((message) => (
           <div
             key={message.id}

@@ -7,9 +7,17 @@ export default {
   plugins: [],
 };
 module.exports = {
-    content: ["./src/**/*.{js,ts,jsx,tsx,html}"],
-    theme: {
-      extend: {},
-    },
-    plugins: [],
-  };
+  content: ["./src/**/*.{js,ts,jsx,tsx,html}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+  theme: {
+    extend: {
+      height: {
+        '50vh': '50vh', // 50% de la altura de la viewport
+        '70vh': '70vh', // 75% de la altura de la viewport
+      }
+    }
+  }
+};
