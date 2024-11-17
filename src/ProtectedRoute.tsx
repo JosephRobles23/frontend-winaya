@@ -7,7 +7,7 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ isAuthenticated, children }: ProtectedRouteProps) => {
   if (!isAuthenticated) {
-    return <Navigate to="/auth/login" />;
+    return <Navigate to="/auth/welcome" />;
   }
   return <>{children}</>;
 };

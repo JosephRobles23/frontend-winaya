@@ -114,7 +114,7 @@ export default function Events() {
   return (
     <div className="max-w-7xl mx-auto py-1 px-4">
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center justify-center mb-7 pt-5">
-        <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text blur-[0.2px]">
+        <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text">
           Calendar
         </span>
       </h1>
@@ -131,12 +131,12 @@ export default function Events() {
           height="auto"
         />
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center justify-center mb-7 pt-5">
-          <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text blur-[0.2px]">
+          <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text ">
             Events
           </span>
         </h1>
         <h1 className="text-2xl md:text-3xl lg:text-3xl font-bold flex items-center justify-left mb-7 pt-5">
-          <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text blur-[0.2px]">
+          <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text">
             Workshop
           </span>
         </h1>
@@ -150,7 +150,7 @@ export default function Events() {
           ))}
         </div>
         <h1 className="text-2xl md:text-3xl lg:text-3xl font-bold flex items-center justify-left mb-7 pt-5">
-          <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text blur-[0.2px]">
+          <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text">
             Conference
           </span>
         </h1>
@@ -164,7 +164,7 @@ export default function Events() {
           ))}
         </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center justify-center mb-7 pt-5">
-          <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text blur-[0.2px]">
+          <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text">
             Maps
           </span>
         </h1>

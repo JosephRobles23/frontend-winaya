@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route,Navigate } from 'react-router-dom';
 import Navbar from './components/Layout/Navbar';
 import LeftSidebar from './components/Layout/LeftSidebar';
 import RightSidebar from './components/Layout/RightSidebar';
@@ -31,7 +31,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/auth/*" element={<AuthRoutes />} />
-
         <Route
           path="*"
           element={

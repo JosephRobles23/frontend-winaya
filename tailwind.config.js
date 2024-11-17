@@ -17,7 +17,17 @@ module.exports = {
       height: {
         '50vh': '50vh', // 50% de la altura de la viewport
         '70vh': '70vh', // 75% de la altura de la viewport
-      }
+      },
+      animation: {
+        gradient: 'gradientBG 2s ease infinite',
+      },
+      keyframes: {
+        gradientBG: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
+        },
+      },
     }
   }
 };
