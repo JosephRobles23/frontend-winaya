@@ -34,7 +34,7 @@ export const AuthInput: React.FC<AuthInputProps> = ({ type, placeholder, value, 
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className="w-full px-12 py-3 bg-gray-50 border border-gray-100 rounded-lg focus:outline-none focus:border-purple-500"
+        className="w-full px-12 py-3 bg-gray-50 border border-gray-100 rounded-lg focus:outline-none focus:border-fuchsia-500"
       />
       {type === 'password' && (
         <button

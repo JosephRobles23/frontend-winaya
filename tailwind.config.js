@@ -19,14 +19,17 @@ module.exports = {
         '70vh': '70vh', // 75% de la altura de la viewport
       },
       animation: {
-        gradient: 'gradientBG 2s ease infinite',
+        gradient: 'gradientBG 3s ease infinite',
       },
       keyframes: {
         gradientBG: {
-          '0%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-          '100%': { backgroundPosition: '0% 50%' },
+          '0%': { backgroundPosition: '0% 80%' },
+          '50%': { backgroundPosition: '100% 80%' },
+          '100%': { backgroundPosition: '0% 80%' },
         },
+      },
+      backgroundImage: {
+        'auth-gradient2': 'linear-gradient(to left, #ffa91e, #ec4899)', // Segundo gradiente
       },
     }
   }

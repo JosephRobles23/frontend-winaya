@@ -82,7 +82,7 @@ export const Login = () => {
 
         <button
           type="submit"
-          className="w-full py-3 rounded-lg text-white font-medium auth-gradient mb-4"
+          className="w-full py-3 rounded-lg text-white font-medium auth-gradient mb-4  hover:bg-auth-gradient2 transition-ease duration-30"
         >
           Iniciar Sesión
         </button>
@@ -90,7 +90,7 @@ export const Login = () => {
 
       <p className="text-center text-gray-600 mb-4">
         ¿No tienes una cuenta?{' '}
-        <Link to="/auth/register" className="text-purple-600 font-medium">
+        <Link to="/auth/register" className="text-purple-600 font-medium hover:underline">
           Regístrate
         </Link>
       </p>

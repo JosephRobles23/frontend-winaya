@@ -59,7 +59,11 @@ body {
 }
 
 .auth-gradient {
-  background: linear-gradient(to right, #a855f7, #ec4899);
+  background: linear-gradient(to right,#ffa91e, #ec4899);
+}
+
+.auth-gradient2 {
+  background: linear-gradient(to left,#ffa91e, #ec4899);
 }
 
 .auth-container {
