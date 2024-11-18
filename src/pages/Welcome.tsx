@@ -13,7 +13,7 @@ export default function Welcome() {
       {/* Contenido principal */}
       <div className="z-10 max-w-md w-full bg-white backdrop-blur-lg rounded-2xl p-8 shadow-xl">
         <div className="flex flex-col items-center space-y-6">
-          <div className="w-34 h-24 bg-white rounded-2xl flex items-center justify-center">
+          <div className="w-40 h-30 bg-white rounded-2xl flex items-center justify-center">
             <img
               src="https://i.postimg.cc/9f72QTtk/WINAYA-LOGO.jpg"
               alt="Logo"
