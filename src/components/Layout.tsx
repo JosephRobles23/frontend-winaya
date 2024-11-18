@@ -76,32 +76,17 @@ export function Layout({ children }: LayoutProps) {
           </div>
           <div className="flex items-center gap-6">
             <Link to="/store">
-              <Store className="w-6 h-6 text-gray-600" />
+              <Store className="w-6 h-6 text-gray-600 hover:text-pink-500" />
             </Link>
-            <Link to="/chat">
-              <MessageCircle className="w-6 h-6 text-gray-600" />
-            </Link>
-            <div className="relative" ref={notificationsRef}>
-              <button
-                className="relative"
-                onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
-              >
-                <Bell className="w-6 h-6 text-gray-600 cursor-pointer hover:text-pink-500" />
-                <span className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-                  2
-                </span>
-              </button>
-              <NotificationsDropdown isOpen={isNotificationsOpen} />
-            </div>
             <div className="relative">
               <button
                 onClick={() => setShowAgentMenu(!showAgentMenu)}
                 className="focus:outline-none"
               >
-                <Bot className="w-6 h-6 text-gray-600" />
+                <Bot className="w-6 h-6 text-gray-600 hover:text-pink-500" />
               </button>
               {showAgentMenu && (
-                <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-2 border">
+                <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-white rounded-lg shadow-lg py-2 border">
                   {agents.map((agent) => (
                     <Link
                       key={agent.path}
@@ -114,6 +99,18 @@ export function Layout({ children }: LayoutProps) {
                   ))}
                 </div>
               )}
+            </div>
+            <div className="relative" ref={notificationsRef}>
+              <button
+                className="relative"
+                onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
+              >
+                <Bell className="w-6 h-6 text-gray-600 cursor-pointer hover:text-pink-500" />
+                <span className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                  2
+                </span>
+              </button>
+              <NotificationsDropdown isOpen={isNotificationsOpen} />
             </div>
             <div className="relative" ref={profileDropdownRef}>
               <button onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}>
@@ -130,9 +127,9 @@ export function Layout({ children }: LayoutProps) {
                       navigate('/profile');
                       setIsProfileDropdownOpen(false);
                     }}
-                    className="w-full px-4 py-2 text-left flex items-center gap-3 hover:bg-gray-50"
+                    className="w-full px-4 py-2 text-left flex items-center gap-3 hover:bg-gray-50 hover:text-pink-500"
                   >
-                    <User className="w-5 h-5 text-gray-500" />
+                    <User className="w-5 h-5 text-gray-600 hover:text-pink-500" />
                     <span>Ver perfil</span>
                   </button>
                   <button
@@ -140,7 +137,7 @@ export function Layout({ children }: LayoutProps) {
                       navigate('/events');
                       setIsProfileDropdownOpen(false);
                     }}
-                    className="w-full px-4 py-2 text-left flex items-center gap-3 hover:bg-gray-50"
+                    className="w-full px-4 py-2 text-left flex items-center gap-3 hover:bg-gray-50 hover:text-pink-500"
                   >
                     <Calendar className="w-6 h-6 text-gray-600 cursor-pointer hover:text-pink-500" />
                     <span>Agenda</span>
@@ -150,7 +147,7 @@ export function Layout({ children }: LayoutProps) {
                       navigate('/forum');
                       setIsProfileDropdownOpen(false);
                     }}
-                    className="w-full px-4 py-2 text-left flex items-center gap-3 hover:bg-gray-50"
+                    className="w-full px-4 py-2 text-left flex items-center gap-3 hover:bg-gray-50 hover:text-pink-500"
                   >
                     <MessageSquare className="w-6 h-6 text-gray-600 cursor-pointer hover:text-pink-500" />
                     <span>Foro</span>
@@ -160,14 +157,14 @@ export function Layout({ children }: LayoutProps) {
                       navigate('/chat');
                       setIsProfileDropdownOpen(false);
                     }}
-                    className="w-full px-4 py-2 text-left flex items-center gap-3 hover:bg-gray-50"
+                    className="w-full px-4 py-2 text-left flex items-center gap-3 hover:bg-gray-50  hover:text-pink-500"
                   >
-                    <MessageCircle className="w-5 h-5 text-gray-500" />
+                    <MessageCircle className="w-5 h-5 text-gray-600 hover:text-pink-500" />
                     <span>Mensajes</span>
                   </button>
                   <button
                     onClick={handleSignOut}
-                    className="w-full px-4 py-2 text-left flex items-center gap-3 hover:bg-gray-50 text-red-600"
+                    className="w-full px-4 py-2 text-left flex items-center gap-3 hover:bg-red-50 text-red-600"
                   >
                     <LogOut className="w-5 h-5" />
                     <span>Salir</span>
