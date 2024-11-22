@@ -113,23 +113,7 @@ export default function Events() {
 
   return (
     <div className="max-w-7xl mx-auto py-1 px-4">
-      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center justify-center mb-7 pt-5">
-        <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text">
-          Calendar
-        </span>
-      </h1>
       <div className="mb-8 bg-white rounded-lg shadow-md p-4">
-        <FullCalendar
-          plugins={[dayGridPlugin, interactionPlugin]}
-          initialView="dayGridMonth"
-          events={[...calendarEvents, ...calendarConferences]} // Combina ambas listas en un solo array
-          headerToolbar={{
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth'
-          }}
-          height="auto"
-        />
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center justify-center mb-7 pt-5">
           <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text ">
             Events
@@ -163,6 +147,22 @@ export default function Events() {
             />
           ))}
         </div>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center justify-center mb-7 pt-5">
+        <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text">
+          Calendar
+        </span>
+        </h1>
+        <FullCalendar
+          plugins={[dayGridPlugin, interactionPlugin]}
+          initialView="dayGridMonth"
+          events={[...calendarEvents, ...calendarConferences]} // Combina ambas listas en un solo array
+          headerToolbar={{
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth'
+          }}
+          height="auto"
+        />
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center justify-center mb-7 pt-5">
           <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text">
             Maps

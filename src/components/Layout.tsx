@@ -58,7 +58,7 @@ export function Layout({ children }: LayoutProps) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+      <header className="fixed top-0 left-0 right-0 bg-white shadow-sm z-50 bg-white">
         <nav className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
           <div className="flex items-center gap-1 sm:gap-8">
             <Link to="/" className="text-xl font-bold">WINAYA</Link>
@@ -66,7 +66,7 @@ export function Layout({ children }: LayoutProps) {
               <input
                 type="text"
                 placeholder="Buscar en WINAYA"
-                className="w-[300px] pl-4 pr-10 py-2 rounded-full bg-pink-50 focus:outline-none focus:ring-2 focus:ring-pink-500 hidden sm:block"
+                className="w-[300px] pl-4 pr-10 py-2 rounded-full bg-[#FFEBF6] focus:outline-none focus:ring-2 focus:ring-pink-500 hidden sm:block"
               />
               <div className="w-10 h-10 rounded-full bg-pink-50 flex items-center justify-center sm:hidden">
                 <Search className="text-gray-400 w-5 h-5" />
@@ -75,15 +75,13 @@ export function Layout({ children }: LayoutProps) {
             </div>
           </div>
           <div className="flex items-center gap-6">
-            <Link to="/store">
-              <Store className="w-6 h-6 text-gray-600 hover:text-pink-500" />
-            </Link>
+            
             <div className="relative">
               <button
                 onClick={() => setShowAgentMenu(!showAgentMenu)}
                 className="focus:outline-none"
               >
-                <Bot className="w-6 h-6 text-gray-600 hover:text-pink-500" />
+                <Bot className="w-7 h-7 text-gray-600 hover:text-pink-500" />
               </button>
               {showAgentMenu && (
                 <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-white rounded-lg shadow-lg py-2 border">
@@ -100,6 +98,9 @@ export function Layout({ children }: LayoutProps) {
                 </div>
               )}
             </div>
+            <Link to="/events">
+              <Calendar className="w-6 h-6 text-gray-600 mb-1 hover:text-pink-500" />
+            </Link>
             <div className="relative" ref={notificationsRef}>
               <button
                 className="relative"
@@ -134,13 +135,13 @@ export function Layout({ children }: LayoutProps) {
                   </button>
                   <button
                     onClick={() => {
-                      navigate('/events');
+                      navigate('/store');
                       setIsProfileDropdownOpen(false);
                     }}
                     className="w-full px-4 py-2 text-left flex items-center gap-3 hover:bg-gray-50 hover:text-pink-500"
                   >
-                    <Calendar className="w-6 h-6 text-gray-600 cursor-pointer hover:text-pink-500" />
-                    <span>Agenda</span>
+                    <Store className="w-6 h-6 text-gray-600 cursor-pointer hover:text-pink-500" />
+                    <span>Tienda</span>
                   </button>
                   <button
                     onClick={() => {

@@ -41,10 +41,10 @@ export default function Navbar() {
           <Link to="/">
             <Home className="w-6 h-6 text-gray-600 cursor-pointer hover:text-pink-500" />
           </Link>
-          <ShoppingCart className="w-6 h-6 text-gray-600 cursor-pointer hover:text-pink-500" />
           <Link to="/events">
             <Calendar className="w-6 h-6 text-gray-600 cursor-pointer hover:text-pink-500" />
           </Link>
+          <ShoppingCart className="w-6 h-6 text-gray-600 cursor-pointer hover:text-pink-500" />
           <div className="relative" ref={notificationsRef}>
             <button
               className="relative"
