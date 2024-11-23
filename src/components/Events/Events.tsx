@@ -30,8 +30,8 @@ export default function Events() {
     },
     {
       id: '2',
-      title: 'Taller online gratis "Introducción a la Robótica para Educación Básica"',
-      description: 'Klassna STEAM te invita a participar de manera GRATUITA del curso Introducción a la Robótica para  Educación Básica...',
+      title: 'Taller online gratis "Introducción al Branding Digital"',
+      description: 'Klassna STEAM te invita a participar de manera GRATUITA del curso Introducción al Branding Digital...',
       image: 'https://i.pinimg.com/236x/83/64/4b/83644b017404267d844506e59167107a.jpg',
       location: 'Virtual',
       date: '2024-11-11',
@@ -41,7 +41,7 @@ export default function Events() {
       id: '3',
       title: 'Curso gratis online "Asistente contable" de la Municipalidad de Majes',
       description: 'La Municipalidad de *MAJES* , en coordinación con el Instituto de Formación Empresarial Avanzys te invita a participa del curso virtual ...',
-      image: 'https://www.expoknews.com/wp-content/uploads/2018/04/5-razones-por-las-que-la-robo%CC%81tica-promueve-la-equidad-de-ge%CC%81nero-2.jpg',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAqEo8pu1_W7qWznfOd7gu2LtwUlBbWX_8Iw&s',
       location: 'Virtual',
       date: '2024-11-5',
       link:'https://docs.google.com/forms/d/e/1FAIpQLSdr3uAGtmqSty5KOHiRto2jrVViYRx5PhkGrqtphIlmtWedcw/viewform'
@@ -116,12 +116,12 @@ export default function Events() {
       <div className="mb-8 bg-white rounded-lg shadow-md p-4">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center justify-center mb-7 pt-5">
           <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text ">
-            Events
+            Eventos
           </span>
         </h1>
         <h1 className="text-2xl md:text-3xl lg:text-3xl font-bold flex items-center justify-left mb-7 pt-5">
           <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text">
-            Workshop
+            Talleres
           </span>
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
@@ -135,7 +135,7 @@ export default function Events() {
         </div>
         <h1 className="text-2xl md:text-3xl lg:text-3xl font-bold flex items-center justify-left mb-7 pt-5">
           <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text">
-            Conference
+            Conferencias
           </span>
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
@@ -149,9 +149,9 @@ export default function Events() {
         </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center justify-center mb-7 pt-5">
         <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text">
-          Calendar
+          Calendario
         </span>
-        </h1>
+         </h1>
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
@@ -165,7 +165,7 @@ export default function Events() {
         />
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold flex items-center justify-center mb-7 pt-5">
           <span className="bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 text-transparent bg-clip-text">
-            Maps
+            Mapas
           </span>
         </h1>
         <div className="min-h-screen bg-gray-50 py-5">

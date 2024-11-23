@@ -53,9 +53,9 @@ export function Profile() {
   const experiences = [
     {
       id: 1,
-      content: 'Curso de preparación de helados artesaneles',
+      content: 'Culmine mi especialidad en manejo de chocolate!',
       date: 'Octubre 2024',
-      image: 'https://i.pinimg.com/564x/f6/ce/e1/f6cee111c4f21a443870e47647c91804.jpg'
+      image: 'https://i.pinimg.com/control2/736x/1d/45/d1/1d45d1ecd050491682dab6aff96490b0.jpg'
     },
     {
       id: 2,
@@ -107,21 +107,45 @@ export function Profile() {
       <section className="mb-8">
         <h2 className="text-xl font-semibold mb-4">Insignias</h2>
         <div className="flex flex-wrap gap-4 justify-center">
-          {[
-            { icon: Award, title: 'Primeros pasos', desc: 'Para usuarios que completaron su perfil empresarial' },
-            { icon: Users, title: 'Conectora', desc: 'Por participar en más de 30 eventos de networking' },
-            { icon: Award, title: 'Top Seller', desc: 'Para emprendedoras que alcanzan una meta de ventas en la tienda' },
-            { icon: Award, title: 'Mentora', desc: 'Para quienes ofrecen mentoría a otras emprendedoras' },
-          ].map((badge, i) => (
-            <div key={i} className="bg-white rounded-xl p-4 text-center flex-1 min-w-[120px]">
-              <div className="w-16 h-16 mx-auto mb-2 bg-pink-100 rounded-lg flex items-center justify-center">
-                <badge.icon className="w-8 h-8 text-pink-500" />
-              </div>
-              <h3 className="font-medium mb-1">{badge.title}</h3>
-              <p className="text-sm text-gray-600">{badge.desc}</p>
-            </div>
-          ))}
-        </div>
+  {[
+    {
+      icon: 'https://i.pinimg.com/736x/c0/2c/97/c02c973421277db04e59b7f4c84a9572.jpg',
+      title: 'Primeros pasos',
+      desc: 'Para usuarios que completaron su perfil empresarial',
+    },
+    {
+      icon: 'https://i.pinimg.com/736x/5d/8e/6e/5d8e6e3d41480cd5be41c855bfdf64b3.jpg',
+      title: 'Conectora',
+      desc: 'Por participar en más de 30 eventos de networking',
+    },
+    {
+      icon: 'https://i.pinimg.com/736x/1b/c0/62/1bc0623755a9081a9b1118722b433b16.jpg',
+      title: 'Top Estudiante',
+      desc: 'Para emprendedoras que completen 15 talleres',
+    },
+    {
+      icon: 'https://i.pinimg.com/736x/55/9e/25/559e25b92aca3b8c57a38f7a1a25da3c.jpg',
+      title: 'Mentora',
+      desc: 'Para quienes ofrecen mentoría a otras emprendedoras',
+    },
+  ].map((badge, i) => (
+    <div
+      key={i}
+      className="bg-white rounded-xl p-4 text-center flex-1 min-w-[250px] min-h-[250px]"
+    >
+      <div className="w-40 h-40 mx-auto mb-2 bg-pink-100 rounded-lg flex items-center justify-center">
+        <img
+          src={badge.icon}
+          alt={badge.title}
+          className="w-32 h-32 object-contain"
+        />
+      </div>
+      <h3 className="font-medium mb-1">{badge.title}</h3>
+      <p className="text-sm text-gray-600">{badge.desc}</p>
+    </div>
+  ))}
+</div>
+
       </section>
 
       
