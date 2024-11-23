@@ -57,10 +57,17 @@ export function Layout({ children }: LayoutProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       <header className="fixed top-0 left-0 right-0 bg-white shadow-sm z-50 bg-white">
         <nav className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
           <div className="flex items-center gap-1 sm:gap-8">
+          <div className="w-15 h-12 bg-white rounded-2xl flex items-center justify-center sm: w-14 h-11">
+            <img
+              src="https://i.postimg.cc/9f72QTtk/WINAYA-LOGO.jpg"
+              alt="Logo"
+              className="w-full h-full object-cover rounded-xl"
+            />
+          </div>
             <Link to="/" className="text-xl font-bold">WINAYA</Link>
             <div className="relative">
               <input
