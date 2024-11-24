@@ -66,7 +66,7 @@ export function MarketAgent() {
     }
 
     try {
-      const response = await axios.post('http://localhost:8000/agente_mercado/', payload);
+      const response = await axios.post('http://18.191.40.129:80/agente_mercado/', payload);
 
       const botMessage = {
         id: Date.now() + 1,
