@@ -83,12 +83,8 @@ export function MarketAgent() {
   return (
     <div className="max-w-3xl mx-auto h-[calc(100vh-3.5rem)] flex flex-col">
       <div className="flex direction-row bg-white p-4 border-b justify-center gap-2">
-        <h1 className="text-xl font-semibold text-cabello-bot flex justify-center items-center">Analista de Mercado</h1>
-        <img
-                src="https://i.postimg.cc/rwVZr8pq/Agente-de-Mercado.webp" // Cambia esta URL por la imagen del robot
-                alt="Agente Financiera"
-                className="w-11 h-11"
-              />
+        <h1 className="text-xl font-semibold text-black flex justify-center items-center">Agente de Mercado</h1>
+       
       </div>
 
       <div className="flex-1 bg-white overflow-y-auto p-4 space-y-4 h-3/4 gap-3">
@@ -99,7 +95,7 @@ export function MarketAgent() {
           >
             {message.isBot && (
               <img
-                src="https://i.postimg.cc/rwVZr8pq/Agente-de-Mercado.webp" // Cambia esta URL por la imagen del robot
+                src="https://i.pinimg.com/736x/85/72/e1/8572e1b215d548d61a38f0902f5b63c5.jpg" // Cambia esta URL por la imagen del robot
                 alt="Robot"
                 className="w-12 h-12  mr-1"
               />
@@ -134,7 +130,7 @@ export function MarketAgent() {
               <button
                 key={index}
                 onClick={() => handleSuggestionClick(suggestion)}
-                className="bg-rose-200 hover:bg-rose-400 text-black px-3 py-2 rounded-lg shadow-md transition-all"
+                className="bg-[#F9B780] hover:bg-[#F27C1C] text-black px-3 py-2 rounded-lg shadow-md transition-all"
               >
                 {suggestion}
               </button>
@@ -144,7 +140,7 @@ export function MarketAgent() {
       </div>
 
       {/* Footer Input */}
-      <div className="p-3 border-3 bg-purple-200 mx-4 rounded-3xl border-transparent hover:border-3 hover:border-cabello-bot transition-all">
+      <div className="p-3 border-3 bg-pink-200 mx-4 rounded-3xl border-transparent hover:border-3 hover:border-pink-500 transition-all">
         <div className="relative flex items-center gap-3">
           <textarea
             placeholder="Envia un mensaje a Luna"
@@ -152,7 +148,7 @@ export function MarketAgent() {
             onChange={(e) => setInputText(e.target.value)}
             onKeyDown={handleKeyDown}
             rows={1}
-            className="flex-1 px-4 py-2 rounded-3xl text-black-400 focus:outline-none resize-none bg-purple-200"
+            className="flex-1 px-4 py-2 rounded-3xl text-black-400 focus:outline-none resize-none bg-pink-200"
             style={{ overflow: 'hidden' }}
             onInput={(e) => {
               const target = e.target as HTMLTextAreaElement;
@@ -165,7 +161,7 @@ export function MarketAgent() {
           </button>
           <button
             onClick={() => handleSendMessage()} // Llama a la función sin argumentos
-            className="p-2 bg-purple-600 text-white rounded-full hover:bg-purple-700"
+            className="p-2 bg-pink-400 text-white rounded-full hover:bg-pink-700"
           >
             <ArrowUp className="w-5 h-5 transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1" />
           </button>

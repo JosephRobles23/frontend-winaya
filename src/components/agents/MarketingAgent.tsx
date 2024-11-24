@@ -83,12 +83,8 @@ export function MarketingAgent() {
   return (
     <div className="max-w-3xl mx-auto h-[calc(100vh-3.5rem)] flex flex-col">
       <div className="flex direction-row bg-white p-4 border-b justify-center gap-2">
-        <h1 className="text-xl font-semibold text-purple-600 flex justify-center items-center">Conectora Digital</h1>
-        <img
-                src="https://i.postimg.cc/CxzsjdbH/Agente-Marketing.webp" // Cambia esta URL por la imagen del robot
-                alt="Agente Financiera"
-                className="w-11 h-11"
-              />
+        <h1 className="text-xl font-semibold text-black flex justify-center items-center">Agente de Marketing</h1>
+        
       </div>
 
       <div className="flex-1 bg-white overflow-y-auto p-4 space-y-4 h-3/4 gap-3">
@@ -99,7 +95,7 @@ export function MarketingAgent() {
           >
             {message.isBot && (
               <img
-                src="https://i.postimg.cc/CxzsjdbH/Agente-Marketing.webp" // Cambia esta URL por la imagen del robot
+                src="https://cdn-icons-png.flaticon.com/512/311/311528.png" // Cambia esta URL por la imagen del robot
                 alt="Robot"
                 className="w-12 h-12  mr-1"
               />
@@ -134,7 +130,7 @@ export function MarketingAgent() {
               <button
                 key={index}
                 onClick={() => handleSuggestionClick(suggestion)}
-                className="bg-turquesa-claro hover:bg-turquesa text-black px-3 py-2 rounded-lg shadow-md transition-all"
+                className="bg-[#EFDCF4] hover:bg-[#C783D8] text-black px-3 py-2 rounded-lg shadow-md transition-all"
               >
                 {suggestion}
               </button>
@@ -144,7 +140,7 @@ export function MarketingAgent() {
       </div>
 
       {/* Footer Input */}
-      <div className="p-3 border-3 bg-purple-200 mx-4 rounded-3xl border-transparent hover:border-3 hover:border-purple-700 transition-all">
+      <div className="p-3 border-3 bg-pink-200 mx-4 rounded-3xl border-transparent hover:border-3 hover:border-pink-700 transition-all">
         <div className="relative flex items-center gap-3">
           <textarea
             placeholder="Envia un mensaje a Ana"
@@ -152,7 +148,7 @@ export function MarketingAgent() {
             onChange={(e) => setInputText(e.target.value)}
             onKeyDown={handleKeyDown}
             rows={1}
-            className="flex-1 px-4 py-2 rounded-3xl text-black-400 focus:outline-none resize-none bg-purple-200"
+            className="flex-1 px-4 py-2 rounded-3xl text-black-400 focus:outline-none resize-none bg-pink-200"
             style={{ overflow: 'hidden' }}
             onInput={(e) => {
               const target = e.target as HTMLTextAreaElement;
@@ -165,7 +161,7 @@ export function MarketingAgent() {
           </button>
           <button
             onClick={() => handleSendMessage()} // Llama a la función sin argumentos
-            className="p-2 bg-purple-600 text-white rounded-full hover:bg-purple-700"
+            className="p-2 bg-pink-400 text-white rounded-full hover:bg-pink-700"
           >
             <ArrowUp className="w-5 h-5 transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1" />
           </button>
