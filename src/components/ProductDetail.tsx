@@ -10,9 +10,9 @@ const businesses = [
     deliveries: '300+',
     location: 'Lima, Perú',
     owner: {
-      name: 'Alexandara Simonic',
+      name: 'Marina Loaz',
       role: 'Repostera',
-      image: 'https://i.pinimg.com/736x/ce/6a/81/ce6a8105ee6297710c0306312e0c07a1.jpg'
+      image: 'https://www.mujeres.la/wp-content/uploads/2021/06/peruana.jpg'
     },
     coverImage: 'https://i.pinimg.com/564x/9a/36/fe/9a36fec0b2a1ea95644bf2bdc0c9bc24.jpg',
  
@@ -114,7 +114,7 @@ const businesses = [
     deliveries: '300+',
     location: 'Lima, Perú',
     owner: {
-      name: 'Petter Robles',
+      name: 'Petruzca Robles',
       role: 'Repostero',
       image: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400'
     },

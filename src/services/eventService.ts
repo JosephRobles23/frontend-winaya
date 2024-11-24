@@ -11,7 +11,7 @@ export const eventService = {
           id: 1,
           title: 'Women in Tech Workshop - Lima',
           description:
-            'Join us for an inspiring workshop on technology and entrepreneurship at the Lima Innovation Hub.',
+            'Únase a nosotros en un taller inspirador sobre tecnología y emprendimiento en el Lima Innovation Hub.',
           imageUrl:
             'https://images.unsplash.com/photo-1522071820081-009f0129c71c',
           date: '2024-04-15T14:00:00',
@@ -24,7 +24,7 @@ export const eventService = {
           id: 2,
           title: 'Female Founders Meetup - San Isidro',
           description:
-            'Network with successful female entrepreneurs and share experiences in the heart of Lima\'s business district.',
+            'Establece contactos con mujeres empresarias exitosas y comparte experiencias en el corazón del distrito comercial de Lima.',
           imageUrl:
             'https://images.unsplash.com/photo-1515187029135-18ee286d815b',
           date: '2024-04-20T18:00:00',

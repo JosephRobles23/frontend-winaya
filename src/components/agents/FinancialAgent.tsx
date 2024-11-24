@@ -6,7 +6,7 @@ export function FinancialAgent() {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: '¡Hola! Soy Marie 👋, tu Aliada Financiera. Estoy aquí para ayudarte con tus consultas sobre finanzas, presupuestos, inversiones y estrategias para hacer crecer tu negocio. ¿En qué puedo ayudarte hoy?',
+      text: '¡Hola! Soy Marie 👋, tu Agente Financiera, y aunque no tengo cuerdas como un quipu, estoy aquí para desatar todos los nudos de tus finanzas. ¿Necesitas ordenar tu presupuesto, planear inversiones o encontrar formas de hacer crecer tu negocio? ¡No te preocupes, yo me encargo! ¿Por dónde empezamos?',
       isBot: true,
     },
   ]);
@@ -36,7 +36,7 @@ export function FinancialAgent() {
     setShowSuggestions(false);
 
     try {
-      const response = await axios.post('http://localhost:8000/agente_financiero/', {
+      const response = await axios.post('http://18.191.40.129:80/agente_financiero/', {
         user_input: messageToSend,
       });
 

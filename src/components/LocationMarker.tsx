@@ -23,7 +23,7 @@ export default function LocationMarker() {
         iconSize: [16, 16],
       })}
     >
-      <Popup>You are here</Popup>
+      <Popup>Estas aquí</Popup>
     </Marker>
   );
 }

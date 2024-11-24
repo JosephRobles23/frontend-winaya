@@ -48,13 +48,13 @@ export default function EventMarker({ event, onAttend }: EventMarkerProps) {
             </div>
             <div className="flex items-center gap-2 text-gray-500">
               <Users className="w-4 h-4" />
-              <span className="text-sm">{event.attendees} attending</span>
+              <span className="text-sm">{event.attendees} Asistiendo</span>
             </div>
             <button
               onClick={() => onAttend(event.id)}
               className="w-full bg-pink-500 text-white py-2 px-4 rounded-lg hover:bg-pink-600 transition-colors"
             >
-              I'll Attend
+              Atenderé
             </button>
           </div>
         </div>

@@ -6,7 +6,7 @@ export function MarketAgent() {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: '¡Hola! Soy Simone, tu Analista de Mercado. Estoy aquí para ayudarte a entender las tendencias del mercado, analizar a tu competencia y encontrar oportunidades de crecimiento. ¿Qué te gustaría analizar hoy?',
+      text: '¡Hola! Soy Simone, tu Agente de Mercado. Mi símbolo es el cuy, porque, como este pequeño curioso, siempre estoy explorando cada rincón del mercado. Estoy enfocada en ayudarte a entender las tendencias, analizar a tu competencia y encontrar oportunidades de crecimiento. Soy rápida, observadora y no dejo escapar ni un detalle. ¿Qué descubrimos juntos hoy?',
       isBot: true,
     },
   ]);
@@ -119,7 +119,7 @@ export function MarketAgent() {
     }
 
     try {
-      const response = await axios.post('http://localhost:8000/agente_mercado/', payload);
+      const response = await axios.post('http://18.191.40.129:80/agente_mercado/', payload);
 
       const botMessage = {
         id: Date.now() + 1,
@@ -190,7 +190,7 @@ export function MarketAgent() {
           >
             {message.isBot && (
               <img
-                src="https://i.pinimg.com/736x/85/72/e1/8572e1b215d548d61a38f0902f5b63c5.jpg" // Cambia esta URL por la imagen del robot
+                src="https://cdn-icons-png.flaticon.com/512/311/311528.png" // Cambia esta URL por la imagen del robot
                 alt="Robot"
                 className="w-12 h-12 mr-1"
               />
@@ -263,7 +263,7 @@ export function MarketAgent() {
               <button
                 key={index}
                 onClick={() => handleSuggestionClick(suggestion)}
-                className="bg-[#F9B780] hover:bg-[#F27C1C] text-black px-3 py-2 rounded-lg shadow-md transition-all"
+                className="bg-[#FFE0F3] hover:bg-[#FF99D8] text-black px-3 py-2 rounded-lg shadow-md transition-all"
               >
                 {suggestion}
               </button>

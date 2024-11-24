@@ -1,5 +1,6 @@
 import { Award, Users, Heart, MessageCircle, Share2, MapPin } from 'lucide-react';
 import { useNavigate} from 'react-router-dom';
+import { useState } from 'react';
 
 const events = [
   {
@@ -31,6 +32,12 @@ export function Profile() {
   const handleViewProductDetail = () => {
     navigate('/product/1');
   };
+  const [isFollowing, setIsFollowing] = useState(false);
+
+  const toggleFollow = () => {
+    setIsFollowing(!isFollowing);
+  };
+
   const posts = [
     {
       id: 1,
@@ -67,24 +74,36 @@ export function Profile() {
 
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
+    <div className="max-w-3xl bg-[#F7F7F7] mx-auto px-4 py-8">
       <div className="bg-white rounded-2xl shadow-sm p-6 mb-8">
         <div className="flex flex-col items-center text-center">
           <img
-            src="https://i.pinimg.com/736x/ce/6a/81/ce6a8105ee6297710c0306312e0c07a1.jpg"
+            src="https://www.mujeres.la/wp-content/uploads/2021/06/peruana.jpg"
             alt="Profile"
             className="w-24 h-24 rounded-full object-cover mb-4"
           />
           <div>
-            <h1 className="text-2xl font-semibold">Alexandara Simonic</h1>
-            <p className="text-gray-600 mb-2">Respostería</p>
+            <h1 className="text-2xl font-semibold">Marina Loaz</h1>
+            <p className="text-gray-600 mb-2">Repostería</p>
             <p className="text-gray-600">Lima, Perú</p>
-            <button
-              onClick={handleViewProductDetail} // Ejecuta la función al hacer clic
-              className="mt-4 bg-purple-600 text-white font-medium rounded-md px-4 py-2 border border-purple-600 hover:bg-purple-700 transition duration-200"
-            >
-              Ver en tienda
-            </button>
+            <div className="flex justify-center gap-4 mt-4">
+              <button
+                onClick={handleViewProductDetail}
+                className="bg-purple-600 text-white font-medium rounded-md px-4 py-2 border border-purple-600 hover:bg-purple-700 transition duration-200"
+              >
+                Ver en tienda
+              </button>
+              <button
+                onClick={toggleFollow}
+                className={`font-medium rounded-md px-4 py-2 border transition duration-200 ${
+                  isFollowing
+                    ? 'bg-pink-500 text-white border-pink-500 hover:bg-pink-600'
+                    : 'bg-white text-pink-500 border-pink-500 hover:bg-pink-100'
+                }`}
+              >
+                {isFollowing ? 'Siguiendo' : 'Seguir'}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -94,8 +113,8 @@ export function Profile() {
             <div className="text-gray-600">Eventos</div>
           </div>
           <div className="flex flex-col items-center text-center">
-            <div className="text-xl font-semibold">300</div>
-            <div className="text-gray-600">Entregas</div>
+            <div className="text-xl font-semibold">320</div>
+            <div className="text-gray-600">Seguidores</div>
           </div>
           <div className="flex flex-col items-center text-center">
             <div className="text-xl font-semibold">10</div>
@@ -194,32 +213,33 @@ export function Profile() {
 
 
       <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">Publicaciones</h2>
-        <div className="space-y-6">
-          {posts.map(post => (
-            <div key={post.id} className="bg-white rounded-xl shadow-sm">
-              <img src={post.image} alt="Post" className="w-full aspect-video object-cover rounded-t-xl" />
-              <div className="p-4">
-                <div className="flex gap-4 mb-4">
-                  <button className="flex items-center gap-2 text-gray-600">
-                    <Heart className="w-6 h-6" />
-                    {post.likes}
-                  </button>
-                  <button className="flex items-center gap-2 text-gray-600">
-                    <MessageCircle className="w-6 h-6" />
-                    {post.comments}
-                  </button>
-                  <button className="flex items-center gap-2 text-gray-600">
-                    <Share2 className="w-6 h-6" />
-                  </button>
-                </div>
-                <p className="mb-2">{post.content}</p>
-                <span className="text-sm text-gray-500">{post.time}</span>
-              </div>
-            </div>
-          ))}
+  <h2 className="text-xl font-semibold mb-4">Publicaciones</h2>
+  <div className="space-y-6 flex flex-wrap gap-4 justify-center">
+    {posts.map(post => (
+      <div key={post.id} className="bg-white rounded-xl shadow-sm max-w-[400px] max-h-[400px] w-full">
+        <img src={post.image} alt="Post" className="w-full aspect-video object-cover rounded-t-xl" />
+        <div className="p-4">
+          <div className="flex gap-4 mb-4">
+            <button className="flex items-center gap-2 text-gray-600">
+              <Heart className="w-6 h-6" />
+              {post.likes}
+            </button>
+            <button className="flex items-center gap-2 text-gray-600">
+              <MessageCircle className="w-6 h-6" />
+              {post.comments}
+            </button>
+            <button className="flex items-center gap-2 text-gray-600">
+              <Share2 className="w-6 h-6" />
+            </button>
+          </div>
+          <p className="mb-2">{post.content}</p>
+          <span className="text-sm text-gray-500">{post.time}</span>
         </div>
-      </section>
+      </div>
+    ))}
+  </div>
+</section>
+
     </div>
   );
 }

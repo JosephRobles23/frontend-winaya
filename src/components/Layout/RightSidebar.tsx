@@ -5,12 +5,12 @@ export default function RightSidebar() {
     {
       title: "Floristería Bella Rosa ",
       subtitle: "bellarosa.com",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK-32SaF66e8zPa_hdy6BBkSmqfgYOEcvXFg&s"
+      image: "https://us.images.westend61.de/0001926546pw/mujer-florista-sonriente-y-feliz-vendiendo-un-ramo-a-un-cliente-en-una-floristeria-rodeada-de-varias-flores-ADSF50551.jpg"
     },
     {
-      title: "Pastelería Ernesto",
-      subtitle: "ernesto.com",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF79NCEbhsH4Y2EJicKKVtf2gcyTwWjPbzaHT5YpmcktdIxG-7HWXhVfRtElAIX-hCtIU"
+      title: "Odontología Auladent",
+      subtitle: "auladent.com",
+      image: "https://blog.auladent.com/wp-content/uploads/2019/03/mujeres-dentistas-1024x538.png"
     }
   ];
 

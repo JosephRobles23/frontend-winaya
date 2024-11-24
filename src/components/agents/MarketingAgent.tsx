@@ -6,7 +6,7 @@ export function MarketingAgent() {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: '¡Hola! Soy Clara, tu Conectora Digital. Estoy aquí para ayudarte a crear estrategias efectivas de marketing, mejorar tu presencia en redes sociales y aumentar la visibilidad de tu marca. ¿Qué proyecto tienes en mente?',
+      text: '¡Hola! Soy Clara, tu Agente de Marketing, y aunque soy una papa, ¡no soy nada básica! Estoy aquí para ayudarte a sembrar estrategias de marketing efectivas, cosechar seguidores en redes sociales y hacer que tu marca destaque. ¿Qué proyecto quieres cultivar hoy?',
       isBot: true,
     },
   ]);
@@ -59,7 +59,7 @@ export function MarketingAgent() {
     };
 
     try {
-      const response = await axios.post('http://localhost:8000/agente_marketing/', payload);
+      const response = await axios.post('http://18.191.40.129:80/agente_marketing/', payload);
 
       const botMessage = {
         id: Date.now() + 1,
@@ -174,7 +174,7 @@ export function MarketingAgent() {
           >
             {message.isBot && (
               <img
-                src="https://cdn-icons-png.flaticon.com/512/311/311528.png" // Cambia esta URL por la imagen del robot
+                src="https://i.pinimg.com/736x/45/ae/10/45ae101f8a4a21b2c249e88f52602a6c.jpg" // Cambia esta URL por la imagen del robot
                 alt="Robot"
                 className="w-12 h-12 mr-1"
               />
