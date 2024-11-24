@@ -6,18 +6,18 @@ export function FinancialAgent() {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: '¡Hola! Soy Luna 👋, tu Aliada Financiera. Estoy aquí para ayudarte con tus consultas sobre finanzas, presupuestos, inversiones y estrategias para hacer crecer tu negocio. ¿En qué puedo ayudarte hoy?',
+      text: '¡Hola! Soy Marie 👋, tu Aliada Financiera. Estoy aquí para ayudarte con tus consultas sobre finanzas, presupuestos, inversiones y estrategias para hacer crecer tu negocio. ¿En qué puedo ayudarte hoy?',
       isBot: true,
     },
   ]);
   const [inputText, setInputText] = useState('');
   const [loading, setLoading] = useState(false);
   const [dots, setDots] = useState('');
-  const [showSuggestions, setShowSuggestions] = useState(true); // Nueva variable para controlar las sugerencias
+  const [showSuggestions, setShowSuggestions] = useState(true);
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const suggestions = [ // Preguntas sugeridas
+  const suggestions = [
     '🐖 ¿Cómo puedo ahorrar más dinero?',
     '📈 ¿Qué es un fondo de inversión?',
     '📝 ¿Cómo crear un presupuesto efectivo?',
@@ -25,43 +25,48 @@ export function FinancialAgent() {
   ];
 
   const handleSendMessage = async (text?: string) => {
-    const messageToSend = text || inputText; // Usa el argumento 'text' si existe, o el 'inputText'
+    const messageToSend = text || inputText;
 
     if (messageToSend.trim() === '') return;
 
     const userMessage = { id: Date.now(), text: messageToSend, isBot: false };
     setMessages([...messages, userMessage]);
-    setInputText(''); // Limpia el campo del input solo cuando el usuario escribe manualmente
+    setInputText('');
     setLoading(true);
-    setShowSuggestions(false); // Oculta las sugerencias al enviar un mensaje
+    setShowSuggestions(false);
 
     try {
-      const response = await axios.post('https://811f-201-218-159-83.ngrok-free.app/financiamiento', {
-        pregunta: messageToSend,
+      const response = await axios.post('http://localhost:8000/agente_financiero/', {
+        user_input: messageToSend,
       });
 
       const botMessage = {
         id: Date.now() + 1,
-        text: response.data.respuesta || `Hola. El panorama financiero para las microempresas es complejo, pero hay varias opciones disponibles para ellas.`,
+        text: response.data.respuesta || 'Lo siento, no pude obtener una respuesta.',
         isBot: true,
       };
 
       setMessages((prevMessages) => [...prevMessages, botMessage]);
     } catch (error) {
       console.error('Error al enviar el mensaje:', error);
+      const botMessage = {
+        id: Date.now() + 1,
+        text: 'Hubo un error al procesar tu solicitud. Por favor, intenta nuevamente.',
+        isBot: true,
+      };
+      setMessages((prevMessages) => [...prevMessages, botMessage]);
     } finally {
       setLoading(false);
     }
   };
 
   const handleSuggestionClick = (suggestion: string) => {
-    setInputText(suggestion); // Coloca la sugerencia en el input
-    setShowSuggestions(false); // Oculta las sugerencias
-    handleSendMessage(suggestion); // Envía automáticamente la sugerencia seleccionada
+    handleSendMessage(suggestion);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
       handleSendMessage();
     }
   };
@@ -82,15 +87,17 @@ export function FinancialAgent() {
 
   return (
     <div className="max-w-3xl mx-auto h-[calc(100vh-3.5rem)] flex flex-col">
+      {/* Header */}
       <div className="flex direction-row bg-white p-4 border-b justify-center gap-2">
         <h1 className="text-xl font-semibold text-orange-500 flex justify-center items-center">Aliada Financiera</h1>
         <img
-                src="https://i.postimg.cc/m2HB5y3P/Agente-Financiera.webp" // Cambia esta URL por la imagen del robot
-                alt="Agente Financiera"
-                className="w-11 h-11"
-              />
+          src="https://i.postimg.cc/m2HB5y3P/Agente-Financiera.webp"
+          alt="Agente Financiera"
+          className="w-11 h-11"
+        />
       </div>
 
+      {/* Chat Messages */}
       <div className="flex-1 bg-white overflow-y-auto p-4 space-y-4 h-3/4 gap-3">
         {messages.map((message) => (
           <div
@@ -99,13 +106,17 @@ export function FinancialAgent() {
           >
             {message.isBot && (
               <img
-                src="https://i.postimg.cc/m2HB5y3P/Agente-Financiera.webp" // Cambia esta URL por la imagen del robot
+                src="https://i.postimg.cc/m2HB5y3P/Agente-Financiera.webp"
                 alt="Robot"
-                className="w-12 h-12  mr-1"
+                className="w-12 h-12 mr-1"
               />
             )}
             <div
-              className={`max-w-[80%]  rounded-lg px-4 py-2 ${message.isBot ? 'bg-plomo-chat text-black-400 font-normal shadow-md' : 'bg-purple-500 text-white shadow-md'}`}
+              className={`max-w-[80%] rounded-lg px-4 py-2 ${
+                message.isBot
+                  ? 'bg-plomo-chat text-black-400 font-normal shadow-md'
+                  : 'bg-purple-500 text-white shadow-md'
+              }`}
             >
               <p>{message.text}</p>
             </div>
@@ -120,14 +131,13 @@ export function FinancialAgent() {
         ))}
         {loading && (
           <div className="flex justify-start">
-            
             <div className="max-w-[80%] rounded-lg px-4 py-2 bg-plomo-chat text-black-400 shadow-md">
               <p>Consultando{dots}</p>
             </div>
           </div>
         )}
 
-        {/* Contenedor de sugerencias */}
+        {/* Suggestions */}
         {showSuggestions && (
           <div className="flex flex-wrap gap-2">
             {suggestions.map((suggestion, index) => (
@@ -147,7 +157,7 @@ export function FinancialAgent() {
       <div className="p-3 border-3 bg-purple-200 mx-4 rounded-3xl border-transparent hover:border-3 hover:border-purple-700 transition-all">
         <div className="relative flex items-center gap-3">
           <textarea
-            placeholder="Envia un mensaje a Luna"
+            placeholder="Envía un mensaje a Marie"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             onKeyDown={handleKeyDown}
@@ -156,20 +166,19 @@ export function FinancialAgent() {
             style={{ overflow: 'hidden' }}
             onInput={(e) => {
               const target = e.target as HTMLTextAreaElement;
-              target.style.height = 'auto'; // Restablecer altura
-              target.style.height = `${target.scrollHeight}px`; // Ajustar según contenido
+              target.style.height = 'auto';
+              target.style.height = `${target.scrollHeight}px`;
             }}
           />
           <button>
-            <Paperclip className='w-5 h5' />
+            <Paperclip className="w-5 h5" />
           </button>
           <button
-            onClick={() => handleSendMessage()} // Llama a la función sin argumentos
+            onClick={() => handleSendMessage()}
             className="p-2 bg-purple-600 text-white rounded-full hover:bg-purple-700"
           >
             <ArrowUp className="w-5 h-5 transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1" />
           </button>
-
         </div>
       </div>
     </div>

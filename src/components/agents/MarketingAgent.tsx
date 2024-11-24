@@ -1,67 +1,144 @@
 import { useState, useEffect, useRef } from 'react';
-import {Paperclip, ArrowUp } from 'lucide-react';
+import { Paperclip, ArrowUp } from 'lucide-react';
 import axios from 'axios';
 
 export function MarketingAgent() {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: '¡Hola! Soy Ana, tu Conectora Digital. Estoy aquí para ayudarte a crear estrategias efectivas de marketing, mejorar tu presencia en redes sociales y aumentar la visibilidad de tu marca. ¿Qué proyecto tienes en mente?',
+      text: '¡Hola! Soy Clara, tu Conectora Digital. Estoy aquí para ayudarte a crear estrategias efectivas de marketing, mejorar tu presencia en redes sociales y aumentar la visibilidad de tu marca. ¿Qué proyecto tienes en mente?',
       isBot: true,
     },
   ]);
   const [inputText, setInputText] = useState('');
   const [loading, setLoading] = useState(false);
   const [dots, setDots] = useState('');
-  const [showSuggestions, setShowSuggestions] = useState(true); // Nueva variable para controlar las sugerencias
+  const [showSuggestions, setShowSuggestions] = useState(true);
+
+  // Variables de estado para datos adicionales y mensaje original
+  const [needsAdditionalData, setNeedsAdditionalData] = useState(false);
+  const [producto, setProducto] = useState('');
+  const [objetivo, setObjetivo] = useState('');
+  const [presupuesto, setPresupuesto] = useState('');
+  const [originalMessage, setOriginalMessage] = useState('');
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const suggestions = [ // Preguntas sugeridas
-    '💡 Créame una campaña de marketing',
+  const suggestions = [
+    '💡 ¿Puedes crearme una campaña de marketing?',
     '🎯 ¿Cómo puedo atraer más clientes sin gastar dinero?',
     '📢 ¿Qué tipo de anuncios funcionan mejor en redes sociales?',
-    '💰 ¿Qué es el ROI ?',
+    '💰 ¿Qué es el ROI?',
   ];
 
   const handleSendMessage = async (text?: string) => {
-    const messageToSend = text || inputText; // Usa el argumento 'text' si existe, o el 'inputText'
+    const messageToSend = text || inputText;
 
     if (messageToSend.trim() === '') return;
 
     const userMessage = { id: Date.now(), text: messageToSend, isBot: false };
     setMessages([...messages, userMessage]);
-    setInputText(''); // Limpia el campo del input solo cuando el usuario escribe manualmente
+    setInputText('');
     setLoading(true);
-    setShowSuggestions(false); // Oculta las sugerencias al enviar un mensaje
+    setShowSuggestions(false);
+
+    // Determinar si se necesitan datos adicionales
+    if (messageToSend.toLowerCase().includes('crear') && messageToSend.toLowerCase().includes('campaña de marketing')) {
+      setNeedsAdditionalData(true);
+      setOriginalMessage(messageToSend); // Guardar el mensaje original
+      setLoading(false);
+      return;
+    }
+
+    // Preparar el payload
+    const payload = {
+      user_input: messageToSend,
+      producto: producto || null,
+      objetivo: objetivo || null,
+      presupuesto: presupuesto ? parseFloat(presupuesto) : null,
+    };
 
     try {
-      const response = await axios.post('https://811f-201-218-159-83.ngrok-free.app/financiamiento', {
-        pregunta: messageToSend,
-      });
+      const response = await axios.post('http://localhost:8000/agente_marketing/', payload);
 
       const botMessage = {
         id: Date.now() + 1,
-        text: response.data.respuesta || `Hola. El panorama financiero para las microempresas es complejo, pero hay varias opciones disponibles para ellas.`,
+        text: response.data.respuesta || 'Lo siento, no pude obtener una respuesta.',
         isBot: true,
       };
 
       setMessages((prevMessages) => [...prevMessages, botMessage]);
+      // Resetear datos adicionales
+      setProducto('');
+      setObjetivo('');
+      setPresupuesto('');
+      setOriginalMessage('');
     } catch (error) {
       console.error('Error al enviar el mensaje:', error);
+      const botMessage = {
+        id: Date.now() + 1,
+        text: 'Hubo un error al procesar tu solicitud. Por favor, intenta nuevamente.',
+        isBot: true,
+      };
+      setMessages((prevMessages) => [...prevMessages, botMessage]);
+    } finally {
+      setLoading(false);
+      setNeedsAdditionalData(false);
+    }
+  };
+
+  const handleSubmitAdditionalData = async () => {
+    if (producto.trim() === '' || objetivo.trim() === '' || presupuesto.trim() === '' || !originalMessage) {
+      alert('Por favor, completa toda la información solicitada.');
+      return;
+    }
+
+    setLoading(true);
+    setNeedsAdditionalData(false);
+
+    // Preparar el payload con el mensaje original y los datos adicionales
+    const payload = {
+      user_input: originalMessage,
+      producto: producto,
+      objetivo: objetivo,
+      presupuesto: parseFloat(presupuesto),
+    };
+
+    try {
+      const response = await axios.post('http://localhost:8000/agente_marketing/', payload);
+
+      const botMessage = {
+        id: Date.now() + 1,
+        text: response.data.respuesta || 'Lo siento, no pude obtener una respuesta.',
+        isBot: true,
+      };
+
+      setMessages((prevMessages) => [...prevMessages, botMessage]);
+      // Resetear datos adicionales
+      setProducto('');
+      setObjetivo('');
+      setPresupuesto('');
+      setOriginalMessage('');
+    } catch (error) {
+      console.error('Error al enviar el mensaje:', error);
+      const botMessage = {
+        id: Date.now() + 1,
+        text: 'Hubo un error al procesar tu solicitud. Por favor, intenta nuevamente.',
+        isBot: true,
+      };
+      setMessages((prevMessages) => [...prevMessages, botMessage]);
     } finally {
       setLoading(false);
     }
   };
 
   const handleSuggestionClick = (suggestion: string) => {
-    setInputText(suggestion); // Coloca la sugerencia en el input
-    setShowSuggestions(false); // Oculta las sugerencias
-    handleSendMessage(suggestion); // Envía automáticamente la sugerencia seleccionada
+    handleSendMessage(suggestion);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
       handleSendMessage();
     }
   };
@@ -82,15 +159,17 @@ export function MarketingAgent() {
 
   return (
     <div className="max-w-3xl mx-auto h-[calc(100vh-3.5rem)] flex flex-col">
+      {/* Header */}
       <div className="flex direction-row bg-white p-4 border-b justify-center gap-2">
         <h1 className="text-xl font-semibold text-purple-600 flex justify-center items-center">Conectora Digital</h1>
         <img
-                src="https://i.postimg.cc/CxzsjdbH/Agente-Marketing.webp" // Cambia esta URL por la imagen del robot
-                alt="Agente Financiera"
-                className="w-11 h-11"
-              />
+          src="https://i.postimg.cc/CxzsjdbH/Agente-Marketing.webp"
+          alt="Conectora Digital"
+          className="w-11 h-11"
+        />
       </div>
 
+      {/* Chat Messages */}
       <div className="flex-1 bg-white overflow-y-auto p-4 space-y-4 h-3/4 gap-3">
         {messages.map((message) => (
           <div
@@ -99,13 +178,17 @@ export function MarketingAgent() {
           >
             {message.isBot && (
               <img
-                src="https://i.postimg.cc/CxzsjdbH/Agente-Marketing.webp" // Cambia esta URL por la imagen del robot
+                src="https://i.postimg.cc/CxzsjdbH/Agente-Marketing.webp"
                 alt="Robot"
-                className="w-12 h-12  mr-1"
+                className="w-12 h-12 mr-1"
               />
             )}
             <div
-              className={`max-w-[80%]  rounded-lg px-4 py-2 ${message.isBot ? 'bg-plomo-chat text-black-400 font-normal shadow-md' : 'bg-purple-500 text-white shadow-md'}`}
+              className={`max-w-[80%] rounded-lg px-4 py-2 ${
+                message.isBot
+                  ? 'bg-plomo-chat text-black-400 font-normal shadow-md'
+                  : 'bg-purple-500 text-white shadow-md'
+              }`}
             >
               <p>{message.text}</p>
             </div>
@@ -120,14 +203,49 @@ export function MarketingAgent() {
         ))}
         {loading && (
           <div className="flex justify-start">
-            
             <div className="max-w-[80%] rounded-lg px-4 py-2 bg-plomo-chat text-black-400 shadow-md">
               <p>Consultando{dots}</p>
             </div>
           </div>
         )}
 
-        {/* Contenedor de sugerencias */}
+        {/* Formulario para datos adicionales */}
+        {needsAdditionalData && (
+          <div className="p-4 bg-gray-100 rounded-md shadow-md">
+            <h2 className="text-lg font-semibold mb-2">Información adicional requerida:</h2>
+            <div className="space-y-2">
+              <input
+                type="text"
+                placeholder="Ingresa el nombre de tu producto"
+                value={producto}
+                onChange={(e) => setProducto(e.target.value)}
+                className="w-full px-3 py-2 border rounded-md"
+              />
+              <input
+                type="text"
+                placeholder="Ingresa el objetivo de tu campaña"
+                value={objetivo}
+                onChange={(e) => setObjetivo(e.target.value)}
+                className="w-full px-3 py-2 border rounded-md"
+              />
+              <input
+                type="number"
+                placeholder="Ingresa tu presupuesto"
+                value={presupuesto}
+                onChange={(e) => setPresupuesto(e.target.value)}
+                className="w-full px-3 py-2 border rounded-md"
+              />
+              <button
+                onClick={handleSubmitAdditionalData}
+                className="px-4 py-2 bg-purple-600 text-white rounded-md mt-2"
+              >
+                Enviar
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Sugerencias */}
         {showSuggestions && (
           <div className="flex flex-wrap gap-2">
             {suggestions.map((suggestion, index) => (
@@ -147,7 +265,7 @@ export function MarketingAgent() {
       <div className="p-3 border-3 bg-purple-200 mx-4 rounded-3xl border-transparent hover:border-3 hover:border-purple-700 transition-all">
         <div className="relative flex items-center gap-3">
           <textarea
-            placeholder="Envia un mensaje a Ana"
+            placeholder="Envía un mensaje a Clara"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             onKeyDown={handleKeyDown}
@@ -156,20 +274,19 @@ export function MarketingAgent() {
             style={{ overflow: 'hidden' }}
             onInput={(e) => {
               const target = e.target as HTMLTextAreaElement;
-              target.style.height = 'auto'; // Restablecer altura
-              target.style.height = `${target.scrollHeight}px`; // Ajustar según contenido
+              target.style.height = 'auto';
+              target.style.height = `${target.scrollHeight}px`;
             }}
           />
           <button>
-            <Paperclip className='w-5 h5' />
+            <Paperclip className="w-5 h5" />
           </button>
           <button
-            onClick={() => handleSendMessage()} // Llama a la función sin argumentos
+            onClick={() => handleSendMessage()}
             className="p-2 bg-purple-600 text-white rounded-full hover:bg-purple-700"
           >
             <ArrowUp className="w-5 h-5 transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1" />
           </button>
-
         </div>
       </div>
     </div>
